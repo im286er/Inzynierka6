@@ -1,0 +1,266 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}
+    {% stylesheets '@AppBundle/Resources/css/glowna.css*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    <div class="jumbotron text-center">
+        <p></p>
+        <div class="row">
+            <div class="container" >
+                {{ form_start(form, {'attr': {'class': 'form-horizontal style-form', 'role': 'form'}}) }}
+                <div class="row">
+                    <div class="form group">
+                        {{ form_label(form.search, '', {'label_attr': {'class': 'col-md-2 control-label'}}) }}
+                        <div class="col-sm-5">
+                            {{ form_widget(form.search, {'attr': {'class':'form-control' , 'placeholder' : 'czego szukasz?'}}) }}
+                            {{ form_errors(form.search) }}
+                        </div>
+                    </div>
+
+                    <div class="form group">
+                        {{ form_label(form.kategoria, 'Kategoria: ', {'label_attr': {'class': 'col-md-1 control-label'}}) }}
+                        <div class="col-sm-2">
+                            {{ form_widget(form.kategoria, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.kategoria) }}
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="form group">
+                        {{ form_label(form.cenaod, 'Cena:', {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+                        <div class="col-sm-1">
+                            {{ form_widget(form.cenaod, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                            {{ form_errors(form.cenaod) }}
+                        </div>
+                    </div>
+                    <div class="form group">
+                        {{ form_label(form.cenado, '', {'label_attr': {'class': 'col-md-1 control-label'}}) }}
+                        <div class="col-sm-1">
+                            {{ form_widget(form.cenado, {'attr': {'class':'form-control', 'placeholder' : 'do'}}) }}
+                            {{ form_errors(form.cenado) }}
+                        </div>
+                    </div>
+                    <div class="form group">
+                        {{ form_label(form.metraz, 'Metraż: ', {'label_attr': {'class': 'col-md-1 control-label'}}) }}
+                        <div class="col-sm-1">
+                            {{ form_widget(form.metraz, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.metraz) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <button type="button" class="btn btn-info " id="Szukaj"><span class="glyphicon glyphicon-search"></span>Szukaj</button>
+                    </div>
+
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+    <div id="map" style="height:400px;width:100%;"></div>
+    <!-- Add Google Maps -->
+
+    <div class="col-sm-offset-0">
+        <h1 class="page-header text-center">Popularne ogłoszenia</h1>
+    </div>
+
+    <div class="carousel slide" id="myCarousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <ul class="thumbnails">
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /Slide1 -->
+            <div class="item">
+                <ul class="thumbnails">
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /Slide2 -->
+            <div class="item">
+                <ul class="thumbnails">
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /Slide3 -->
+        </div>
+
+
+        <nav>
+            <ul class="control-box pager">
+                <li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+                <li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></li>
+            </ul>
+        </nav>
+        <!-- /.control-box -->
+
+    </div><!-- /#myCarousel -->
+
+    <script>
+        // Carousel Auto-Cycle
+        $(document).ready(function() {
+            $('.carousel').carousel({
+                interval: 6000
+            })
+        });
+    </script>
+
+
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        function initialize() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(51.2379753, 22.5754416),
+                zoom: 11,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(mapCanvas, mapOptions)
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+{% endblock fos_user_content %}

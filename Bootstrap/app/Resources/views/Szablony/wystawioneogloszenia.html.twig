@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}
+    <style>
+        #kontener{
+            position: relative;
+            top: 60px;
+        }
+    </style>
+
+    <div class="container" id="kontener">
+        <div class="col-sm-12">
+        <h1 class="page-header text-center">Wystawione ogłoszenia</h1>
+
+            <table class="table">
+                    <tr>
+                        {# sorting of properties based on query components #}
+                        <th{% if pagination.isSorted('a.tytul') %} class="sorted"{% endif %}>
+                        Tytuł</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Kategoria', 'a.kategoria') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Cena ^', 'a.cena', {'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'a.cena', {'direction': 'desc'})}}</th>
+                    </tr>
+
+                    {# table body #}
+                    {% for oferta in pagination %}
+                        <tr {% if loop.index is odd %}class="color"{% endif %}>
+                            <td><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"> {{ oferta.tytul }}</a></td>
+                            <td>{{ oferta.kategoria }}</td>
+                            <td>{{ oferta.cena }}zł/miesiąc</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Opcje <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Zmień</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"  id="confirm"><span class="glyphicon glyphicon-trash"></span> Usuń</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+            </table>
+                {# display navigation #}
+
+                    {{ knp_pagination_render(pagination) }}
+
+                <div class="row col-sm-offset-10"><a href="{{ path('fos_user_profile_show') }}" class="text-center new-account"><h4>Powrót do profilu</h4></a></div>
+        </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <button type="button" class="close" data-dismiss="modal"></button>
+                        <h4 class="text-center">Potwierdzenie akcji</h4>
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">Anuluj</button>
+                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+                            <a class="usun" href="#">Usuń</a></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        $("tr #confirm").click(function(){
+  $("#myModal").modal();
+});
+    </script>
+    <style>
+        .usun{
+            color: white;
+        }
+        .modal-dialog{
+            position: absolute;
+            left: 35%;
+            margin-left: 0px;
+            height: 500px;
+            top: 50%;
+            margin-top: -250px;
+        }
+        .modal-body{
+            padding:40px 50px;
+            padding-bottom: 50px;
+        }
+    </style>
+{% endblock fos_user_content %}

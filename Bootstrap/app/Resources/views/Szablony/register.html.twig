@@ -1,0 +1,103 @@
+{% extends "base.html.twig" %}
+
+{% block fos_user_content %}
+    {% stylesheets '@AppBundle/Resources/css/register2.css*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+        <div class="container" id="lolololol">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-header">
+                        <h2>Rejestracja</h2>
+                    </div>
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'class': 'form-horizontal'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.imie, 'Imię i nazwisko(*):', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.imie, {'attr': {'class':'form-control', 'placeholder':'Imię' }}) }}
+                            {{ form_errors(form.imie) }}
+                        </div>
+                        <div class="col-sm-4">
+                            {{ form_label(form.nazwisko) }}
+                            {{ form_widget(form.nazwisko, {'attr': {'class':'form-control', 'placeholder':'Nazwisko'}}) }}
+                            {{ form_errors(form.nazwisko) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.username, 'Nazwa użytkownika(*):', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-5">
+                            {{ form_widget(form.username, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.username) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.email, 'Adres Email(*):', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-5">
+                            {{ form_widget(form.email, {'attr': {'class':'form-control' }}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.telefon, 'Numer telefonu:', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-5">
+                            {{ form_widget(form.telefon, {'attr': {'class':'form-control' }}) }}
+                            {{ form_errors(form.telefon) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.plainPassword.first, 'Hasło(*):', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-5">
+                            {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control' }}) }}
+                            {{ form_errors(form.plainPassword.first) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.plainPassword.second, 'Powtórz hasło(*):', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-5">
+                            {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control' }}) }}
+                            {{ form_errors(form.plainPassword.second) }}
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        {{ form_label(form.captcha) }}
+                        <div class="col-sm-4 col-sm-offset-3">
+                            {{ form_widget(form.captcha,  {'attr': {'class':'form-control', 'placeholder':'Przepisz kod z obrazka' }}) }}
+                            {{ form_errors(form.captcha) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3" id="req">
+                            {{ form_label(form.regulamin) }}
+                            {{ form_widget(form.regulamin) }}
+                            {{ form_errors(form.regulamin) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <input type="submit" class="btn btn-lg btn-primary " value="Zarejestruj się" />
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    <style>
+        #req{
+            position: relative;
+            left:15px;
+        }
+    </style>
+
+{% endblock fos_user_content %}

@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block fos_user_content %}
+<style>
+    #kontener{
+        position: relative;
+        top: 60px;
+    }
+</style>
+<div class="container text-center" id="kontener">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h1 class="page-header">Edycja danych osobowych</h1>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default text-left">
+                    <div class="panel-body">
+                        {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit', 'class': 'form-horizontal'}}) }}
+                            <div class="form-group">
+                                {{ form_label(form.username, 'Nazwa użytkownika:', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.username, {'attr': {'class':'form-control'}}) }}
+                                    {{ form_errors(form.username) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.imie , 'Imię:', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.imie , {'attr': {'class':'form-control'}}) }}
+                                    {{ form_errors(form.imie ) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            {{ form_label(form.nazwisko , 'Nazwisko:', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.nazwisko , {'attr': {'class':'form-control'}}) }}
+                                {{ form_errors(form.nazwisko ) }}
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.email, 'Adres email:', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+                                    {{ form_errors(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telefon , 'Telefon:', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.telefon , {'attr': {'class':'form-control'}}) }}
+                                    {{ form_errors(form.telefon ) }}
+                                </div>
+                            </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.current_password , 'Podaj hasło:', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.current_password, {'attr': {'class':'form-control'}}) }}
+                                {{ form_errors(form.current_password) }}
+                            </div>
+                        </div>
+                            <div>
+                                <input type="submit" class="btn btn-primary btn-lg col-sm-offset-5" value="Zmień dane osobowe" />
+                            </div>
+                        {{ form_end(form) }}
+                        <div class="col-sm-offset-8"><a href="{{ path('fos_user_profile_show') }}" class="text-center new-account"><h4>Powrót do profilu</h4></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock fos_user_content %}

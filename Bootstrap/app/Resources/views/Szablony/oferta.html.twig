@@ -1,0 +1,239 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}
+    <div class="fos_user_user_show">
+        <div class="container-fluid " id="kontener">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2 class="page-header text-center">{{ oferty.tytul }}</h2>
+                        <div id="main_area">
+                            <!-- Slider -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="col-xs-12" id="slider">
+                                        <!-- Top part of the slider -->
+                                        <div class="row">
+                                            <div class="col-sm-12" id="carousel-bounding-box">
+                                                <div class="carousel slide" id="myCarousel">
+                                                    <!-- Carousel items -->
+                                                    <div class="carousel-inner">
+                                                        {% if zdjecia!=null %}
+                                                            {% for zdj in zdjecia %}
+
+                                                                {% if zdj==zdjecia[0] %}
+                                                                    <div class="active item" data-slide-number="0">
+                                                                {% else %}
+                                                                    <div class="item" data-slide-number="0">
+                                                                {% endif %}
+
+                                                                 <img src="{{ asset(zdj.imagePath) }}" />
+
+                                                                 </div>
+                                                            {% endfor %}
+                                                        {% endif %}
+
+
+                                                    </div>
+                                                    <!-- Carousel nav -->
+                                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                                    </a>
+                                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <p><strong>Dostępne od: </strong>{{ oferty.wolneod|date('d-m-Y') }}</p>
+                                    <p><strong>Miasto: </strong>{{ oferty.miasto }}</p>
+                                    <p><strong>Dzielnica: </strong>{{  oferty.dzielnica }}</p>
+                                    <p><strong>Ulica: </strong>{{  oferty.ulica }}</p>
+                                    <p><strong>Typ stancji: </strong>{{  oferty.kategoria }}</p>
+                                    <p><strong>Typ budynku: </strong>{{  oferty.typ }}</p>
+                                    <p><strong>Piętro: </strong>{{  oferty.pietro }}</p>
+                                    <p><strong>Liczba pokoi: </strong>{{ oferty.liczbapokoi }}</p>
+                                    <p><strong>Maksymalna liczba osób: </strong>{{ oferty.maksliczbosob }}</p>
+                                    <p><strong>Metraż: </strong>{{ oferty.metraz }}</p>
+                                    <p><strong>Ogłoszenie wygasa:</strong></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-sm-6" id="slider-thumbs">
+                                        <!-- Bottom switcher of slider -->
+                                        <ul class="hide-bullets">
+                                            {% for zdj in zdjecia %}
+
+                                                <li class="col-sm-3">
+                                                    <a class="thumbnail" id="carousel-selector-0">
+
+                                                        <img src="{{  asset(zdj.imagePath) }}" />
+
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+
+
+
+
+                                         </ul>
+                                    </div>
+                                <!--/Slider-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5" id="naw" >
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#mapa">Mapa</a></li>
+                            <li><a data-toggle="tab" href="#kontakt">Kontakt</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="mapa" class="tab-pane fade in active">
+                                <div id="map" style="height:400px;width:100%;"></div>
+                            </div>
+                            <div id="kontakt" class="tab-pane fade">
+                                <h3 class="page-header">Dodane przez:<a href="{{ path('_profil', {'id': oferty.userid.id}) }}" class="text-left"> {{ oferty.userid }}</a></h3>
+                                <div class="btn-group-vertical  col-sm-4">
+                                    <button id="telefon" class="btn btn-default btn-md">Numer telefonu</button>
+                                    <button id="email" class="btn btn-default btn-md">Adres email</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <button id="obs" type="button" class="btn btn-info col-sm-offset-10">Dodaj do obserwowanych</button>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well" id="studnie" >
+                            <h3>Opłaty</h3>
+                            <p><strong>Cena za miesiąc: </strong>{{ oferty.cena }}</p>
+                            <p><strong>Dodatkowe opłaty na miesiąc:</strong>{{ oferty.dodatkoweoplaty }}</p>
+                            <p><strong>Kaucja:</strong>{{ oferty.kaucja }}</p>
+                            <p></p>
+                        </div>
+                    </div>
+                    {% if wyposazenie!=null %}
+                    <div class="col-sm-4">
+                        <div class="well" id="studnie">
+                            <h3>Wyposażenie</h3>
+                            {% for wyp in wyposazenie %}
+                                   <lu class=""> {{ wyp }},</lu>
+                                {% endfor %}
+                            {% endif %}
+                            {% if preferencje!=null %}
+                            <h3>Współlokatorzy</h3>
+                            {% for pref in preferencje %}
+                            <lu> {{ pref }},</lu>
+                            {% endfor %}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well" id="studnie">
+                                <h3>Opis</h3>
+                                <div id="opis2"><lu> {{ oferty.opis|striptags }}</lu></div>
+                        </div>
+                    </div>
+
+                </div>
+                    <p class="text-right col-sm-offset-8"><strong>Wyświetleń: </strong>{{  oferty.views }}</p>
+                    <a href="#"><p class="text-right col-sm-offset-8"><strong>Zgłoś naruszenie zasad</strong></p></a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        #opis2{
+            word-wrap: break-word;
+        }
+        #obs{
+            position: relative;
+            top:-5px;
+            left:5px;
+        }
+        #studnie{
+
+        }
+        #naw{
+            poistion: relative;
+            top: 40px;
+        }
+        #kontener{
+            position: relative;
+            top: 60px;
+        }
+        .hide-bullets {
+            list-style:none;
+            margin-left: -40px;
+            margin-top:20px;
+        }
+
+        .thumbnail {
+            padding: 0;
+        }
+
+        .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+            width: 100%;
+        }
+        .nav-tabs li a {
+            color: #777;
+        }
+    </style>
+
+    {# Skrypt do kontaktu #}
+    <script>
+        $(document).ready(function(){
+            $('#telefon').popover({title: "nr telefonu", content: "{{ oferty.userid.telefon }}", trigger: "hover", placement: "right"});
+            $('#email').popover({title: "Adres email", content: "{{ oferty.userid.email }}", trigger: "hover", placement: "right"});
+        });
+    </script>
+
+    {# Skrypt do galerii #}
+    <script>
+        jQuery(document).ready(function($) {
+
+            $('#myCarousel').carousel({
+                interval: 5000
+            });
+
+            //Handles the carousel thumbnails
+            $('[id^=carousel-selector-]').click(function () {
+                var id_selector = $(this).attr("id");
+                try {
+                    var id = /-(\d+)$/.exec(id_selector)[1];
+                    console.log(id_selector, id);
+                    jQuery('#myCarousel').carousel(parseInt(id));
+                } catch (e) {
+                    console.log('Regex failed!', e);
+                }
+            });
+            // When the carousel slides, auto update the text
+            $('#myCarousel').on('slid.bs.carousel', function (e) {
+                var id = $('.item.active').data('slide-number');
+                $('#carousel-text').html($('#slide-content-'+id).html());
+            });
+        });
+    </script>
+
+    {# Skrypt do mapki #}
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        function initialize() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(51.2379753, 22.5754416),
+                zoom: 11,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(mapCanvas, mapOptions)
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+{% endblock fos_user_content %}

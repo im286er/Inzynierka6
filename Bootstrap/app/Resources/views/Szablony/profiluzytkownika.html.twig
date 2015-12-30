@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}
+    {% stylesheets '@AppBundle/Resources/css/profiluzytkownika.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+
+    <div class="container" id="kontener">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="" class="img-rounded img-responsive" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h4>{{ user.username }}</h4>
+                            <p></p>
+                                <i class="glyphicon glyphicon-user"></i> {{ user.imie }} {{ user.nazwisko }}
+                                <br />
+                                <i class="glyphicon glyphicon-envelope"></i> {{ user.email }}
+                                <br />
+                                <i class="glyphicon glyphicon-phone"></i> {{ user.telefon }}
+                        </div>
+                        <div class="col-sm-6 col-sm-offset-5"><button class="btn btn-primary"><a href="{{ path ('_ofertyuser', {'id': user.id}) }}" class="text-center new-account">Wystawione ogłoszenia użytkownika {{ user.username }} </a></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="page-header text-center">Komentarze</h1>
+            <!-- /col-sm-12 -->
+            <div class="col-sm-12">
+                <div class="col-sm-1">
+                    <div class="thumbnail">
+                        <a href="{{ path('_profil', {'id': 'x'}) }}"><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+                    </div><!-- /thumbnail -->
+                </div><!-- /col-sm-1 -->
+
+                <div class="col-sm-11">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>użytkownik</strong>
+                            <span class="text-muted col-sm-offset-9">dodano 5 dni temu</span>
+                        </div>
+                        <div class="panel-body">
+                            <p>komentarz</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary col-sm-2 col-sm-offset-10" id="confirm">Dodaj komentarz</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="text-center">Nowy komentarz</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form, {'method': 'post', 'attr': {'class': 'form-horizontal'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.komentarz, '', {'label_attr': {}}) }}
+                        {{ form_widget(form.komentarz, {'attr': {'class':'form-control counted', 'id':'area'}}) }}
+                        <h6 class="col-sm-offset-9" id="counter">Pozostało 255 znaków</h6>
+                        {{ form_errors(form.komentarz) }}
+                    </div>
+                    {{ form_end(form) }}
+                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"></span>
+                            <a class="usun" href="#">Anuluj</a></button>
+                        <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">Dodaj</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        $("#confirm").click(function(){
+            $("#myModal").modal();
+        });
+    </script>
+
+    <script>
+        /**
+         *
+         * jquery.charcounter.js version 1.2
+         * requires jQuery version 1.2 or higher
+         * Copyright (c) 2007 Tom Deater (http://www.tomdeater.com)
+         * Licensed under the MIT License:
+         * http://www.opensource.org/licenses/mit-license.php
+         *
+         */
+
+        (function($) {
+            /**
+             * attaches a character counter to each textarea element in the jQuery object
+             * usage: $("#myTextArea").charCounter(max, settings);
+             */
+
+            $.fn.charCounter = function (max, settings) {
+                max = max || 100;
+                settings = $.extend({
+                    container: "<span></span>",
+                    classname: "charcounter",
+                    format: "(Pozostało %1 znaków)",
+                    pulse: true,
+                    delay: 0
+                }, settings);
+                var p, timeout;
+
+                function count(el, container) {
+                    el = $(el);
+                    if (el.val().length > max) {
+                        el.val(el.val().substring(0, max));
+                        if (settings.pulse && !p) {
+                            pulse(container, true);
+                        };
+                    };
+                    if (settings.delay > 0) {
+                        if (timeout) {
+                            window.clearTimeout(timeout);
+                        }
+                        timeout = window.setTimeout(function () {
+                            container.html(settings.format.replace(/%1/, (max - el.val().length)));
+                        }, settings.delay);
+                    } else {
+                        container.html(settings.format.replace(/%1/, (max - el.val().length)));
+                    }
+                };
+
+                function pulse(el, again) {
+                    if (p) {
+                        window.clearTimeout(p);
+                        p = null;
+                    };
+                    el.animate({ opacity: 0.1 }, 100, function () {
+                        $(this).animate({ opacity: 1.0 }, 100);
+                    });
+                    if (again) {
+                        p = window.setTimeout(function () { pulse(el) }, 200);
+                    };
+                };
+
+                return this.each(function () {
+                    var container;
+                    if (!settings.container.match(/^<.+>$/)) {
+                        // use existing element to hold counter message
+                        container = $(settings.container);
+                    } else {
+                        // append element to hold counter message (clean up old element first)
+                        $(this).next("." + settings.classname).remove();
+                        container = $(settings.container)
+                                .insertAfter(this)
+                                .addClass(settings.classname);
+                    }
+                    $(this)
+                            .unbind(".charCounter")
+                            .bind("keydown.charCounter", function () { count(this, container); })
+                            .bind("keypress.charCounter", function () { count(this, container); })
+                            .bind("keyup.charCounter", function () { count(this, container); })
+                            .bind("focus.charCounter", function () { count(this, container); })
+                            .bind("mouseover.charCounter", function () { count(this, container); })
+                            .bind("mouseout.charCounter", function () { count(this, container); })
+                            .bind("paste.charCounter", function () {
+                                var me = this;
+                                setTimeout(function () { count(me, container); }, 10);
+                            });
+                    if (this.addEventListener) {
+                        this.addEventListener('input', function () { count(this, container); }, false);
+                    };
+                    count(this, container);
+                });
+            };
+
+        })(jQuery);
+
+        $(function() {
+            $(".counted").charCounter(255,{container: "#counter"});
+        });
+
+    </script>
+{% endblock fos_user_content %}

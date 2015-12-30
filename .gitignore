@@ -1,0 +1,6 @@
+/Bootstrap/app/cache/*
+/Bootstrap/app/logs/*
+/Bootstrap/web/uploads/*
+/Bootstrap/web/bundles/framework
+/Bootstrap/web/bundles/sensiodistribution
+/Bootstrap/web/bundles/easyadmin

@@ -1,0 +1,16 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<style>
+    #kontener{
+        position: relative;
+        top: 100px;
+    }
+</style>
+<div class="fos_user_user_show">
+    <div class="container" id="kontener">
+        <p>Nazwa użytkownika: {{ user.username }}</p>
+        <p>Adres email: {{ user.email }}</p>
+        <p>Imie: {{ user.imie }}</p>
+        <p>Nazwisko: {{ user.nazwisko }}</p>
+        <p>Numer telefonu: {{ user.telefon }}</p>
+    </div>
+</div>

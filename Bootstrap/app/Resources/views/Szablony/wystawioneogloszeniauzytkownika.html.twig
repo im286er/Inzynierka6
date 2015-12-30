@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}
+    <style>
+        #kontener{
+            position: relative;
+            top: 60px;
+        }
+    </style>
+    <div class="container" id="kontener">
+        <div class="col-sm-12">
+        <h1 class="page-header text-center">Wystawione ogłoszenia</h1>
+            <table class="table">
+                    <tr>
+                        {# sorting of properties based on query components #}
+                        <th{% if pagination.isSorted('a.tytul') %} class="sorted"{% endif %}>
+                        Tytuł</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Kategoria', 'a.kategoria') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Cena ^', 'a.cena', {'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'a.cena', {'direction': 'desc'})}}</th>
+                    </tr>
+
+                    {# table body #}
+                    {% for oferta in pagination %}
+                        <tr {% if loop.index is odd %}class="color"{% endif %}>
+                            <td><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"> {{ oferta.tytul }}</a></td>
+                            <td>{{ oferta.kategoria }}</td>
+                            <td>{{ oferta.cena }}zł/miesiąc</td>
+                        </tr>
+                    {% endfor %}
+            </table>
+                {# display navigation #}
+                <div class="navigation col-sm-offset-11">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+                <div class="row col-sm-offset-10"><a href="" class="text-center new-account"><h4>Powrót do profilu użytkownika ###</h4></a></div>
+        </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        $("tr #confirm").click(function(){
+  $("#myModal").modal();
+});
+    </script>
+    <style>
+        .usun{
+            color: white;
+        }
+        .modal-dialog{
+            position: absolute;
+            left: 35%;
+            margin-left: 0px;
+            height: 500px;
+            top: 50%;
+            margin-top: -250px;
+        }
+        .modal-body{
+            padding:40px 50px;
+            padding-bottom: 50px;
+        }
+    </style>
+{% endblock fos_user_content %}

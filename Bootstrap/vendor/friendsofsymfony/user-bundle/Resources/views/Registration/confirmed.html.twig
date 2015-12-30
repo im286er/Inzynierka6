@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block fos_user_content %}
+    <style>
+        #kontener{
+            position: relative;
+            top:75px;
+        }
+    </style>
+    <div class="container" id="kontener">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <p>Rejestracja zakończyła się pomyślnie</p>
+            {% if targetUrl %}
+            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+            {% endif %}
+                <a href="{{ path('StronaGlowna') }}" class="text-center new-account">Wróć na stronę główną</a>
+        </div>
+    </div>
+{% endblock fos_user_content %}

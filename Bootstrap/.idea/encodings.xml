@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/views/Szablony/glowna.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/views/Szablony/noweogloszenie.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/views/Szablony/oferta.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/views/Szablony/profil.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/views/Szablony/register.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/views/base.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AppBundle/Form/NoweOgloszenie.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AppBundle/Form/Search.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/confirmed.html.twig" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

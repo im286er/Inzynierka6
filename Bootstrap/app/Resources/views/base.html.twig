@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Cztery Ściany{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="http://bootboxjs.com/bootbox.js"></script>
+        <script src="//rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>
+
+        {% stylesheets '@AppBundle/Resources/css/style.css*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    </head>
+    <body>
+
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+
+
+       <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('StronaGlowna') }}">Cztery Ściany</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path('easyadmin') }}">ADMIN PANEL</a></li>
+                    {% endif %}
+                <li><a href="{{ path('NoweOgloszenie') }}">DODAJ OGŁOSZENIE</a></li>
+                <li> <a href="{{ path('fos_user_profile_show') }}">
+                        {{ app.security.getToken().getUser().getUsername() }}   </a></li>
+                <li><a href="{{ path('fos_user_security_logout')  }}">WYLOGUJ</a></li>
+                {% else %}
+                <li><a href="{{ path('fos_user_security_login') }}">DODAJ OGŁOSZENIE</a></li>
+                <li><a href="{{ path('fos_user_profile_show') }}">PROFIL</a></li>
+                <li><a href="{{ path('fos_user_security_login') }}">ZALOGUJ</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="footer navbar-default navbar-fixed-bottom" id="footer">
+    <footer class="container" >
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" id="reg">Regulamin</a></li>
+                <li><a href="#" id="pol">Polityka prywatności</a></li>
+                <li><a href="#" id="kon">Kontakt</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+
+    <div class="modal fade" id="regulamin" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" id="regulamincss">
+                <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="text-center">Regulamin serwisu</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Definicje</p>
+                    <p>Portal – portal promocyjny dla firm, prowadzony przez PTB SEBRUK Seweryn Szast, ul. Modrzewiowa 44, Lublin 20-138, zwany dalej SEBRUK.</p>
+                    <p>Firma – osoba prawna, jednostka organizacyjna nie posiadająca osobowości prawnej wpisana do Krajowego Rejestru Sądowego, a także osoba fizyczna prowadząca działalność gospodarczą wpisana do ewidencji działalności gospodarczej.</p>
+                    <p>Wizytówka – bezpłatna forma promocji Firmy</p>
+                    <p>I. Postanowienia ogólne</p>
+                    <p>1. Niniejszy Regulamin określa zasady zamieszczania w portalu informacji przez Firmy o prowadzonej przez nie działalności gospodarczej.</p>
+                    <p>2. Zarejestrowanie Firmy w portalu polega na dodaniu ogłoszenia za pomocą formularza. Dodanie ogłoszenia jest równoznaczne z akceptacją niniejszego Regulaminu i skutkuje zawarciem umowy z SEBRUK na zasadach opisanych w Regulaminie. Akceptując niniejszy Regulamin osoba zgłaszająca firmę oświadcza, że jest upoważniona do jej reprezentowania.</p>
+                    <p>3. Jeżeli w trakcie korzystania z usług portalu dane Firmy ulegną zmianie, Firma zobowiązana jest do ich niezwłocznej aktualizacji.</p>
+                    <p>Aktualizacji danych Firma dokonuje poprzez przesłanie ich do SEBRUK przez formularz kontaktowy.</p>
+                    <p>4. Wszystkie przekazane do publikacji materiały stanowią własność Firmy i podlegają ochronie prawnej. Zabrania się ich kopiowania i powielania przez osoby trzecie bez uprzedniej zgody Firmy.</p>
+                    <p>5. Firma oświadcza jednocześnie, że wszelkie wprowadzone przez nią dane nie naruszają praw osób trzecich. W sytuacji wystąpienia przez osobę trzecią z jakimikolwiek roszczeniami przeciwko SEBRUK związanymi z bezprawnym charakterem tych danych, Firma zobowiązuje się do pokrycia wszelkich kosztów, jakie SEBRUK poniósł w związku z wytoczonymi roszczeniami.</p>
+                    <p>6. Firma wyraża niniejszym zgodę na edycję przez SEBRUK materiałów i danych wprowadzonych przez nią do portalu, a w szczególności zmiany rozmiaru lub objętości plików graficznych w zakresie niezbędnym do prawidłowego wyświetlania oferty i funkcjonowania portalu.</p>
+                    <p>7. Zamieszczane opisy powinny być napisane w języku polskim, poprawne pod względem ortograficznym, gramatycznym i stylistycznym. SEBRUK nie zapoznaje się przed publikacją na stronach portalu z każdym ogłoszeniem, jednakże w razie wykrycia nieprawidłowości, zastrzega sobie prawo do edycji lub usunięcia ogłoszenia niespełniającego ww. wymogów.</p>
+                    <p>8. Firma akceptując niniejszy Regulamin wyraża zgodę na ogłoszenie jej danych, znaków graficznych oraz wprowadzonych przez nią treści na łamach portalu.</p>
+                    <p>9. Firma wyraża zgodę na umieszczanie przez SEBRUK w dowolnym miejscu portalu wszelkiego rodzaju ogłoszeń, reklam oraz informacji dotyczących produktów lub usług podmiotów współpracujących z SEBRUK.</p>
+                    <p>10. Firmie przysługuje nielimitowany okres na odstąpienie od rejestracji ogłoszenia na portalu.</p>
+                    <p>II. Ograniczenia i odpowiedzialność</p>
+                    <p>1. Firma rejestrując ogłoszenie w portalu ponosi wszelką odpowiedzialności za treści zawarte w ogłoszeniu, w szczególności za prawdziwość danych, rzetelność treści ogłoszeń, a także zgodność z obowiązującym prawem, zwyczajami i normami moralnymi oraz niniejszym Regulaminem.</p>
+                    <p> Wszelkie informacje zamieszczane w portalu, powinny być kompletne, dokładne i nie mogą wprowadzać w błąd klientów.</p>
+                    <p>W sytuacji, gdy SEBRUK uzyska informację o naruszeniu przez Firmę regulaminu, SEBRUK upoważnione jest do usunięcia ogłoszenia, a Firmie nie przysługuje zwrot poniesionych w związku z dodawaniem ogłoszenia wydatków ani odrębne odszkodowanie.</p>
+                    <p>2. Zabrania się wypełniania pól tekstowych treściami do tego nieprzeznaczonymi oraz zamieszczania plików graficznych niemających bezpośredniego związku z Firmą i jej ofertą pod rygorem usunięcia ogłoszenia z portalu bez konieczności uprzedniego poinformowania o tym Firmy.</p>
+                    <p>3. SEBRUK nie ponosi odpowiedzialności za treść wystawianych referencji oraz opinii zamieszczanych w portalu przez klientów Firmy. Wszelkie wynikłe spory będą rozstrzygane pomiędzy zainteresowanymi stronami, bez udziału SEBRUK. Ujawnienie danych stron sporu może nastąpić jedynie na mocy decyzji uprawnionego organu.</p>
+                    <p>4. SEBRUK nie ponosi żadnej odpowiedzialności względem Firmy za sytuacje związane z naruszeniem jej praw przez podmioty trzecie, wykorzystywanie ich w całości lub części przez osoby trzecie w celach komercyjnych, a także za podszywanie się pod Firmę przez podmioty trzecie. Wszelkie wynikłe sprawy, o których mowa powyżej rozstrzygane będą bez udziału SEBRUK.</p>
+                    <p>5. SEBRUK nie ponosi odpowiedzialności za cenę, rodzaj, jakość, bezpieczeństwo oraz wartość usług lub towaru ogłaszanego przez Firmę w konsekwencji skorzystania z jej oferty.</p>
+                    <p>6. SEBRUK nie bierze udziału w transakcjach dokonywanych pomiędzy Firmą a jej klientami.</p>
+                    <p>7. SEBRUK nie bierze żadnej odpowiedzialności za brak dostępu do portalu wywołany awariami, przerwami technicznymi, przerwami w świadczeniu usług dostawców internetowych, utratą danych lub wskutek działań siły wyższej.</p>
+                    <p>8. Zabrania się jakichkolwiek działań potencjalnie lub faktycznie utrudniających lub uniemożliwiających prawidłowe działanie portalu.</p>
+                    <p>9. Za naruszenie postanowień niniejszego Regulaminu uważa się również działania lub zaniechania zmierzające do jego obejścia.</p>
+                    <p>III. Koszty rejestrowania firm w portalu</p>
+                    <p>1. a. Dodanie ogłoszenia Firmy jest bezpłatne.</p>
+                    <p>IV. Reklamacje</p>
+                    <p>1. Reklamacje mogą być składane wyłącznie drogą elektroniczną za pomocą poczty elektronicznej lub udostępnionego formularza kontaktowego.</p>
+                    <p>2. Termin na rozpatrzenie reklamacji wynosi 14 dni roboczych i biegnie z chwilą otrzymania zgłoszenia.</p>
+                    <p>VI. Postanowienia końcowe</p>
+                    <p>1. Strony zobowiązane są do przestrzegania aktualnie obowiązującego w Polsce prawa.</p>
+                    <p>2. Wszelkie spory pomiędzy Firmą a SEBRUK, którym nie uda się zapobiec w drodze postępowania reklamacyjnego, rozstrzygane będą przez sąd powszechny, właściwy dla siedziby SEBRUK.</p>
+                    <p>3. Firma oświadcza, iż zapoznała się z Regulaminem i akceptuje go w całości.</p>
+                    <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">Wróć</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="polityka" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" id="regulamincss">
+                <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="text-center">Polityka prywatności</h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>Polityka prywatności Azteko.pl</p>
+                    <p>Podanie danych osobowych, a także zgoda na ich przetwarzanie są całkowicie dobrowolne. Wszelkie przekazane nam dane osobowe są przetwarzane wyłącznie w zakresie i celu, na jaki wyraziłeś zgodę. W przypadku, gdy postanowisz jednak nie podawać nam niezbędnych do realizacji zamówienia danych i nie wyrazisz zgody na ich przetwarzanie, niestety nie będziemy mogli zrealizować Twojego zamówienia.</p>
+
+                    <p>Prosimy, abyś pamiętał, że w każdej chwili masz prawo do aktualizacji lub całkowitego usunięcia swoich danych osobowych. Możesz to zrobić samodzielnie, jak i korzystając z naszej pomocy, której chętnie udzielimy.</p>
+
+                    <p>Zapewniamy Cię, że nasza firma przestrzega restryktywnej polityki bezpieczeństwa danych osobowych. Twoje dane osobowe są u nas bezpieczne i dokładamy wszelkich starań, aby poziom ten z roku na rok był coraz wyższy. Wierzymy, że zapoznanie się z naszą polityką prywatności pozwoli Ci poczuć się bezpiecznie i cieszyć zakupami w azteko.pl.</p>
+
+                    <p>I. Kto jest administratorem danych osobowych Azteko.pl?
+                    <p>Administratorem danych osobowych Azteko.pl (dalej Administrator), czyli odpowiedzialnym za zapewnienie bezpieczeństwa Twoim danym osobowym jest:</p>
+                    <p>Azteko.pl</p>
+                    <p>Ul. Żabińskiego 2 lok 0</p>
+                    <p>02-793 Warszawa</p>
+                    <p>NIP:  536-159-80-85</p>
+                    <p>REGON: 015872808</p>
+                    <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">Wróć</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="kontakt" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" >
+                <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="text-center">Kontakt</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Informacje o przedsiębiorstwie prowadzącym serwis Allegro.pl</p>
+                    <p>Grupa Allegro Sp. z o.o.</p>
+                    <p>ul. Grunwaldzka 182</p>
+                    <p>60-166 Poznań</p>
+
+                    <p>Firma wpisana do Rejestru Przedsiębiorców prowadzonego przez Sąd Rejonowy Poznań - Nowe Miasto i Wilda w Poznaniu, Wydział VIII Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS 0000268796, NIP 527-25-25-995, REGON 140762508,</p>
+                    <p>Kapitał zakładowy 33 976 500,00 PLN</p>
+
+                    <p>Adres do korespondencji</p>
+                    <p>Serwis Allegro.pl</p>
+                    <p>Grupa Allegro Sp. z o.o.</p>
+                    <p>ul. Grunwaldzka 182</p>
+                    <p>60-166 Poznań</p>
+                    <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">Wróć</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#reg").click(function(){
+                $("#regulamin").modal();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#pol").click(function(){
+                $("#polityka").modal();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#kon").click(function(){
+                $("#kontakt").modal();
+            });
+        });
+    </script>
+</body>
+</html>
