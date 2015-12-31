@@ -33,7 +33,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Zmień</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#"  id="confirm"><span class="glyphicon glyphicon-trash"></span> Usuń</a></li>
+                                        <li><a data-toggle="modal" id="confirm" data-id="{{oferta.idOferty}}"><span class="glyphicon glyphicon-trash"></span> Usuń</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -58,9 +58,11 @@
                         <h4 class="text-center">Potwierdzenie akcji</h4>
                     </div>
                     <div class="modal-body">
-                        <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">Anuluj</button>
-                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
-                            <a class="usun" href="#">Usuń</a></button>
+                      <h5 class="text-center">Czy na pewno chcesz usunąć tę ofertę?</h5>
+                        <button type="button" class="btn btn-primary btn-default pull-right" data-dismiss="modal">
+                         <a  class="usun">Anuluj</a></button>
+                        <button type="button" id="openBtn" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+                            <a  id="delete"  class="usun">Usuń</a></button>
                     </div>
                 </div>
 
@@ -72,9 +74,21 @@
 
 
     <script>
+    var route;
+    var idoferty;
         $("tr #confirm").click(function(){
-  $("#myModal").modal();
+         idoferty = $(this).data('id');
+    a = document.getElementById('delete');
+    route = "{{ path('_usun', { 'idOferty': "PLACEHOLDER" }) }}";
+
+     a.setAttribute("href", route.replace("PLACEHOLDER", idoferty) );
+  $("#myModal").modal('show');
+
 });
+$('#openBtn').click(function(){
+  location.replace(route.replace("PLACEHOLDER", idoferty));
+});
+
     </script>
     <style>
         .usun{
@@ -89,7 +103,7 @@
             margin-top: -250px;
         }
         .modal-body{
-            padding:40px 50px;
+            padding:10px 50px;
             padding-bottom: 50px;
         }
     </style>

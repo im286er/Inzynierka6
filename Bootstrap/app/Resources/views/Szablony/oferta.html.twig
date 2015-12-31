@@ -185,7 +185,11 @@
             color: #777;
         }
     </style>
-
+    <script>
+    $('#obs').click(function(){
+    location.replace("{{ path('_obserwuj', { 'idOferty': oferty.idOferty}) }}");
+    });
+    </script>
     {# Skrypt do kontaktu #}
     <script>
         $(document).ready(function(){

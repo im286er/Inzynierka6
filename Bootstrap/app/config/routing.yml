@@ -13,8 +13,12 @@ _oferta:
          path:   /oferta/{idOferty}
          defaults:  { _controller: AppBundle:Oferta:show }
 _usun:
-         path: /profile/oferty/delete
+         path:  /oferta/{idOferty}/delete
          defaults: { _controller: AppBundle:UsunOferte:deleteby }
+_obserwuj:
+         path:  /oferta/{idOferty}/obserwuj
+         defaults: { _controller: AppBundle:Obserwuj:obserwuj }
+
 _profil:
          path:   /profil/{id}
          defaults:  { _controller: AppBundle:ProfilUzytkownika:show }

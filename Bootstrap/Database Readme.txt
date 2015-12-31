@@ -1,6 +1,6 @@
 Jak utworzyæ i zupdatowaæ bazê danych:
 
-1.Otwórz cmd i wejdŸ do katalogu z projektem (u mnie cd C:/xampp/htdocs/Inzynierka5/Bootstrap) nastêpnie wklej poni¿sze komendy:
+1.Otwórz cmd i wejdŸ do katalogu z projektem (u mnie cd C:/xampp/htdocs/Inzynierka6/Bootstrap) nastêpnie wklej poni¿sze komendy:
 2.php app/console doctrine:database:create
 3.php app/console doctrine:schema:update --force
 4.php app/console doctrine:fixtures:load

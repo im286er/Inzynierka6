@@ -32,15 +32,25 @@ class ProfileController extends Controller
     /**
      * Show the user
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
+        $em    = $this->get('doctrine.orm.entity_manager');
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+        $dql   = "SELECT a FROM AppBundle:Obserwowane a WHERE a.user=".$this->getUser()->getID();
+        $query = $em->createQuery($dql);
 
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
         return $this->render(':Szablony:profil.html.twig', array(
-            'user' => $user
+            'user' => $user,
+            'pagination' => $pagination,
         ));
     }
 
