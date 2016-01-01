@@ -23,16 +23,15 @@ class Obserwowane
 
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Oferty")
-     * @ORM\JoinColumn(name="oferta", referencedColumnName="idOferty")
+     * @ORM\ManyToOne(targetEntity="Oferty",inversedBy="obserwowane")
+     * @ORM\JoinColumn(name="oferta", referencedColumnName="id_oferty", onDelete="CASCADE")
      */
     protected $oferta;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="fos_user")
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="obserwowane")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     protected $user;
 

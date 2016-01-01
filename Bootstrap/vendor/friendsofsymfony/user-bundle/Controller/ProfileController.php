@@ -17,6 +17,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
+use Proxies\__CG__\AppBundle\Entity\Oferty;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,12 +40,25 @@ class ProfileController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $dql   = "SELECT a FROM AppBundle:Obserwowane a WHERE a.user=".$this->getUser()->getID();
-        $query = $em->createQuery($dql);
+        //SELECT * FROM oferty INNER JOIN obserwowane ON oferty.id_oferty=obserwowane.oferta WHERE oferty.user_id=2
+       // $dql   = "SELECT a FROM AppBundle:Obserwowane a JOIN a.oferta u WHERE a.user=".$this->getUser()->getID();
+        //$dql = $em->createQuery($dql);
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->createQueryBuilder();
+        $dql=$result->select('o')
+                ->from('AppBundle:Oferty', 'o')
+                ->innerJoin('o.obserwowane','w')
+                ->andWhere('o.user_id = :user')
+                ->setParameter('user', $this->getUser()->getID())
+                ->getQuery();
+
+        $logger = $this->get('logger');
+        $logger->info('I just got the logger');
+
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
+            $dql, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             5/*limit per page*/
         );

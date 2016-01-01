@@ -67,21 +67,32 @@
                             </div>
                         </div>
                         <div class="tab-pane fade in" id="tab2">
+
                             <table class="table">
                                 <tr>
+                                    {# sorting of properties based on query components #}
                                     <th>Tytuł</th>
                                     <th>Kategoria</th>
                                     <th>Cena</th>
                                 </tr>
-                                <tr>
-                                        <td><a href="#"> tytul</a></td>
-                                        <td>kategoria</td>
-                                        <td>zł/miesiąc</td>
+
+                                {# table body #}
+                                {% for oferta in pagination %}
+                                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+
+                                        <td><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"> {{ oferta.tytul }}</a></td>
+                                        <td>{{ oferta.kategoria }}</td>
+                                        <td>{{ oferta.cena }}zł/miesiąc</td>
                                         <td>
                                             <a href="#"><span class="glyphicon glyphicon-trash"></span> Usuń</a>
                                         </td>
-                                </tr>
+
+                                    </tr>
+                                {% endfor %}
                             </table>
+                            {# display navigation #}
+
+                            {{ knp_pagination_render(pagination) }}
                         </div>
                         <div class="tab-pane fade in" id="tab3">
                             <ul class="media-list">

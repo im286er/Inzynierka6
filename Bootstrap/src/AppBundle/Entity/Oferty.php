@@ -117,6 +117,11 @@ class Oferty
      */
     protected $views;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="oferta")
+     */
+    protected $obserwowane;
+
 
 
     /**

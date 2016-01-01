@@ -36,6 +36,11 @@ class User extends BaseUser
 
     public $regulamin;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="user")
+     */
+    protected $obserwowane;
+
 
 
 
