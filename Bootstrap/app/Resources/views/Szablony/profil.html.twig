@@ -84,7 +84,7 @@
                                         <td>{{ oferta.kategoria }}</td>
                                         <td>{{ oferta.cena }}zł/miesiąc</td>
                                         <td>
-                                            <a href="#"><span class="glyphicon glyphicon-trash"></span> Usuń</a>
+                                            <a href="{{ path('_nieobserwuj', { 'idOferty': oferta.idOferty }) }}"><span class="glyphicon glyphicon-trash"></span> Usuń</a>
                                         </td>
 
                                     </tr>

@@ -18,6 +18,9 @@ _usun:
 _obserwuj:
          path:  /oferta/{idOferty}/obserwuj
          defaults: { _controller: AppBundle:Obserwuj:obserwuj }
+_nieobserwuj:
+         path:  /oferta/{idOferty}/nieobserwuj
+         defaults: { _controller: AppBundle:Obserwuj:delete }
 
 _profil:
          path:   /profil/{id}
