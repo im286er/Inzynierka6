@@ -39,7 +39,7 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="user")
      */
-    protected $obserwowane;
+    public $obserwowane;
 
 
 

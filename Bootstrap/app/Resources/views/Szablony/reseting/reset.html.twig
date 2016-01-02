@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block fos_user_content %}
+<style>
+    #kontener{
+        position: relative;
+        top: 75px;
+    }
+    .center-block {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .element {
+    .center-block();
+    }
+</style>
+<div class="container" id="kontener">
+    <div class="center-block">
+        <div class="col-sm-4 col-sm-offset-4">
+            <h1 class="page-header text-center">Resetowanie hasła</h1>
+            <div class="panel panel-default text-left">
+                <div class="panel-body">
+                    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock fos_user_content %}

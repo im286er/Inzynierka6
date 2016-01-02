@@ -1,7 +1,16 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
+    <style>
+        #kontener{
+            position: relative;
+            top: 75px;
+        }
+    </style>
+    <div class="container" id="kontener">
     <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+        <p><a href="{{ path('StronaGlowna') }}" class="text-center new-account">Wróć na stronę główną</a> lub <a href="{{ path('fos_user_security_login') }}"> zaloguj się</a> </p>
+    </div>
 {% endblock fos_user_content %}

@@ -15,7 +15,7 @@
                             <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="" class="img-rounded img-responsive" />
                         </div>
                         <div class="col-sm-6 col-md-8">
-                            <h4>{{ user.username }}</h4>
+                            <div><strong id="name">{{ user.username }}</strong><span class="text-muted col-sm-offset-3">ostatnio zalogowany {{ user.lastLogin|date('d-m-Y') }}</span></div>
                             <p></p>
                                 <i class="glyphicon glyphicon-user"></i> {{ user.imie }} {{ user.nazwisko }}
                                 <br />

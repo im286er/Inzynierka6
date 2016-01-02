@@ -4,14 +4,15 @@
 
 {% block fos_user_content %}
 <style>
-    .container{
+    #kontener{
         position: relative;
         top: 75px;
     }
 </style>
-    <div class="container">
+    <div class="container" id="kontener">
         <p>
         {{ 'resetting.check_email'|trans({'%email%': email}) }}
         </p>
+        <p><a href="{{ path('StronaGlowna') }}" class="text-center new-account">Wróć na stronę główną</a></p>
     </div>
 {% endblock %}

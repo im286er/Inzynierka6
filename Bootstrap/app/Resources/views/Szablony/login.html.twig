@@ -35,10 +35,11 @@
                         <input type="password" class="form-control" id="password" placeholder="Hasło" name="_password" required="required" />
 
                         <input type="submit"  class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit" value="Zaloguj się" />
-
-                        <label class="checkbox-inline" for="remember_me"><input type="checkbox"  id="remember_me" name="_remember_me" value="on" />Zapamiętaj mnie</label>
+                        <div class="text-center">
+                        <label class="checkbox-inline" for="remember_me"><input type="checkbox"  id="remember_me" name="_remember_me" value="on" />Zapamiętaj mnie</label></div>
 
                     </form>
+                    <div class="text-center"><a href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-warning-sign"></span> Zapomniałeś hasła?</a></div>
                 </div>
                 <a href="{{ path('fos_user_registration_register') }}" class="text-center new-account">Stwórz konto</a>
             </div>
