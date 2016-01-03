@@ -26,9 +26,7 @@
                                                                 {% else %}
                                                                     <div class="item" data-slide-number="0">
                                                                 {% endif %}
-
-                                                                 <img src="{{ asset(zdj.imagePath) }}" />
-
+                                                                        <a><img class="thumbnail img-responsive"src="{{ asset(zdj.imagePath) }}" /></a>
                                                                  </div>
                                                             {% endfor %}
                                                         {% endif %}
@@ -61,28 +59,6 @@
                                     <p><strong>Ogłoszenie wygasa:</strong></p>
                                 </div>
                             </div>
-                            <div class="row">
-                                    <div class="col-sm-6" id="slider-thumbs">
-                                        <!-- Bottom switcher of slider -->
-                                        <ul class="hide-bullets">
-                                            {% for zdj in zdjecia %}
-
-                                                <li class="col-sm-3">
-                                                    <a class="thumbnail" id="carousel-selector-0">
-
-                                                        <img src="{{  asset(zdj.imagePath) }}" />
-
-                                                    </a>
-                                                </li>
-                                            {% endfor %}
-
-
-
-
-                                         </ul>
-                                    </div>
-                                <!--/Slider-->
-                            </div>
                         </div>
                     </div>
                     <div class="col-sm-5" id="naw" >
@@ -104,21 +80,23 @@
                             </div>
                         </div>
                     </div>
-                        <button id="obs" type="button" class="btn btn-info col-sm-offset-10">Dodaj do obserwowanych</button>
+
+
+                                <button id="obs" type="button" class="btn btn-info col-sm-offset-10">Dodaj do obserwowanych</button>
+
+
                 </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="well" id="studnie" >
+                    <div class="row">
+                    <div class="col-sm-12 well" id="studnie" >
+                        <div class="col-sm-4">
                             <h3>Opłaty</h3>
                             <p><strong>Cena za miesiąc: </strong>{{ oferty.cena }}</p>
                             <p><strong>Dodatkowe opłaty na miesiąc:</strong>{{ oferty.dodatkoweoplaty }}</p>
                             <p><strong>Kaucja:</strong>{{ oferty.kaucja }}</p>
                             <p></p>
                         </div>
-                    </div>
                     {% if wyposazenie!=null %}
-                    <div class="col-sm-4">
-                        <div class="well" id="studnie">
+                        <div class="col-sm-4">
                             <h3>Wyposażenie</h3>
                             {% for wyp in wyposazenie %}
                                    <lu class=""> {{ wyp }},</lu>
@@ -131,42 +109,84 @@
                             {% endfor %}</p>
                             {% endif %}
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="well" id="studnie">
+                        <div class="col-sm-4">
                                 <h3>Opis</h3>
                                 <div id="opis2"><lu> {{ oferty.opis|striptags }}</lu></div>
                         </div>
                     </div>
-
                 </div>
+                    <div id="dol">
                     <p class="text-right col-sm-offset-8"><strong>Wyświetleń: </strong>{{  oferty.views }}</p>
-                    <a href="#"><p class="text-right col-sm-offset-8"><strong>Zgłoś naruszenie zasad</strong></p></a>
+                    <a href="#"><p class="text-right col-sm-offset-8"><strong>Zgłoś naruszenie zasad</strong></p></a></div>
+                </div>
 
+
+            </div>
+            <div class="modal" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" type="button" data-dismiss="modal">×</button>
+                            <h3 class="modal-title"></h3>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modalCarousel" class="carousel">
+
+                                <div class="carousel-inner">
+
+                                </div>
+
+                                <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal">Wróć</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
     <style>
+        .modal-dialog {
+            width:1100px;
+            position:relative;
+            left:375px;
+        }
+        .thumbnail {margin-bottom:6px;}
+
+        .carousel-control.left,.carousel-control.right{
+            background-image:none;
+            margin-top:10%;
+            width:5%;
+        }
         #opis2{
             word-wrap: break-word;
         }
         #obs{
             position: relative;
-            top:-5px;
-            left:5px;
+            top:42px;
+            left:8px;
         }
         #studnie{
-
+            position: relative;
+            top: 45px;
         }
         #naw{
-            poistion: relative;
+            position: relative;
             top: 40px;
         }
         #kontener{
             position: relative;
             top: 60px;
+        }
+        #dol{
+            position: relative;
+            top: 40px;
         }
         .hide-bullets {
             list-style:none;
@@ -185,6 +205,43 @@
             color: #777;
         }
     </style>
+    <script>
+        /* copy loaded thumbnails into carousel */
+        $('.row .thumbnail').on('load', function() {
+
+        }).each(function(i) {
+            if(this.complete) {
+                var item = $('<div class="item"></div>');
+                var itemDiv = $(this).parents('div');
+                var title = $(this).parent('a').attr("title");
+
+                item.attr("title",title);
+                $(itemDiv.html()).appendTo(item);
+                item.appendTo('.carousel-inner');
+                if (i==0){ // set first item active
+                    item.addClass('active');
+                }
+            }
+        });
+
+        /* activate the carousel */
+        $('#modalCarousel').carousel({interval:false});
+
+        /* change modal title when slide changes */
+        $('#modalCarousel').on('slid.bs.carousel', function () {
+            $('.modal-title').html($(this).find('.active').attr("title"));
+        })
+
+        /* when clicking a thumbnail */
+        $('.row .thumbnail').click(function(){
+            var idx = $(this).parents('div').index();
+            var id = parseInt(idx);
+            $('#myModal').modal('show'); // show the modal
+            $('#modalCarousel').carousel(id); // slide carousel to selected
+
+        });
+
+    </script>
     <script>
     $('#obs').click(function(){
     location.replace("{{ path('_obserwuj', { 'idOferty': oferty.idOferty}) }}");

@@ -2,9 +2,6 @@
 
 
 {% block fos_user_content %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
     {% stylesheets '@AppBundle/Resources/css/login.css' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -33,6 +30,9 @@
 
                         <label for="password"></label>
                         <input type="password" class="form-control" id="password" placeholder="Hasło" name="_password" required="required" />
+                        {% if error %}
+                            <div class="text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
 
                         <input type="submit"  class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit" value="Zaloguj się" />
                         <div class="text-center">
