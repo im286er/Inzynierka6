@@ -11,7 +11,7 @@ class Search extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('search', 'text', array(
-            'label' => ' '
+            'label' => false
             ))
             ->add('kategoria', 'choice', array(
                 'choices'  => array('mp' => 'Miejsce w pokoju', 'p' => 'Pokój',  'm' => 'Mieszkanie', 'k' => 'Kawalerka'  ),
