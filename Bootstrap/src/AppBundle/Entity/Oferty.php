@@ -126,6 +126,10 @@ class Oferty
      * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="oferta")
      */
     protected $obserwowane;
+    /**
+     * @ORM\OneToMany(targetEntity="Zdjecia", mappedBy="oferta")
+     */
+    protected $zdjecia;
 
 
 
@@ -705,5 +709,39 @@ class Oferty
     public function getObserwowane()
     {
         return $this->obserwowane;
+    }
+
+    /**
+     * Add zdjecium
+     *
+     * @param \AppBundle\Entity\Zdjecia $zdjecium
+     *
+     * @return Oferty
+     */
+    public function addZdjecium(\AppBundle\Entity\Zdjecia $zdjecium)
+    {
+        $this->zdjecia[] = $zdjecium;
+
+        return $this;
+    }
+
+    /**
+     * Remove zdjecium
+     *
+     * @param \AppBundle\Entity\Zdjecia $zdjecium
+     */
+    public function removeZdjecium(\AppBundle\Entity\Zdjecia $zdjecium)
+    {
+        $this->zdjecia->removeElement($zdjecium);
+    }
+
+    /**
+     * Get zdjecia
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getZdjecia()
+    {
+        return $this->zdjecia;
     }
 }

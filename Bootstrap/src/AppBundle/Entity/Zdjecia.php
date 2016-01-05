@@ -36,12 +36,12 @@ class Zdjecia
      */
     private $imagePath;
 
+
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Oferty")
-     * @ORM\JoinColumn(name="oferta", referencedColumnName="idOferty")
+     * @ORM\ManyToOne(targetEntity="Oferty",inversedBy="zdjecia")
+     * @ORM\JoinColumn(name="oferta", referencedColumnName="id_oferty", onDelete="CASCADE")
      */
-    public $oferta;
+    protected $oferta;
 
 
 
@@ -74,7 +74,17 @@ class Zdjecia
     public function setImagePath()
     {
 
-        $this->imagePath = '/uploads/gallery/'.$this->getOferta().'/'.$this->getImageName();
+        $this->imagePath = '/uploads/gallery/'.$this->getOferta()->getIdOferty().'/'.$this->getImageName();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -82,7 +92,7 @@ class Zdjecia
      *
      * @param integer $oferta
      *
-     * @return Preferencje_Oferty
+     * @return Zdjecia
      */
     public function setOferta($oferta)
     {
@@ -99,15 +109,5 @@ class Zdjecia
     public function getOferta()
     {
         return $this->oferta;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

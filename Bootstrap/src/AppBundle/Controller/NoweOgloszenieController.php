@@ -173,7 +173,7 @@ class NoweOgloszenieController extends Controller
             foreach($finder as $file)
             {
                 $Zdjecie = new Zdjecia();
-                $Zdjecie->setOferta($Oferta->getIdOferty());
+                $Zdjecie->setOferta($Oferta);
                 $Zdjecie->setImageName($file->getRelativePathname());
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($Zdjecie);

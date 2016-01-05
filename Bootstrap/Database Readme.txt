@@ -25,3 +25,4 @@ To tylko dla mnie:
 
 php app/console doctrine:generate:entity 
 php app/console doctrine:generate:entities AppBundle/Entity/nazwa
+DROP TABLE fos_user,oferty,preferencje,wyposazenie,wyposazenie_oferty,preferencje_oferty,zdjecia,obserwowane,komentarze
