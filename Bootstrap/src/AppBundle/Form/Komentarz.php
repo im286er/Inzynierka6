@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Komentarze extends AbstractType
+class Komentarz extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,6 +23,6 @@ class Komentarze extends AbstractType
 
     public function getName()
     {
-        return 'app_bundle_komentarze';
+        return 'app_bundle_komentarz';
     }
 }

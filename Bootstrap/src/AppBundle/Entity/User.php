@@ -41,6 +41,15 @@ class User extends BaseUser
      */
     public $obserwowane;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Komentarze", mappedBy="user_komentujacy")
+     */
+    public $komentujacy;
+    /**
+     * @ORM\OneToMany(targetEntity="Komentarze", mappedBy="user_profil")
+     */
+    public $komentowany;
+
 
 
 

@@ -21,20 +21,18 @@ class Wyposazenie_Oferty
      */
     protected $idWyposazenie;
 
-
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Oferty", inversedBy="oferty")
-     * @ORM\JoinColumn(name="oferta", referencedColumnName="idOferty")
+     * @ORM\ManyToOne(targetEntity="Oferty",inversedBy="wyposazenie")
+     * @ORM\JoinColumn(name="oferta", referencedColumnName="id_oferty", onDelete="CASCADE")
      */
     protected $oferta;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Wyposazenie")
-     * @ORM\JoinColumn(name="wyposazenie", referencedColumnName="$idwyposazenie")
+     * @ORM\ManyToOne(targetEntity="Wyposazenie",inversedBy="oferta")
+     * @ORM\JoinColumn(name="wyposazenie", referencedColumnName="idwyposazenie", onDelete="CASCADE")
      */
     protected $wyposazenie;
+
 
     /**
      * Get idWyposazenie

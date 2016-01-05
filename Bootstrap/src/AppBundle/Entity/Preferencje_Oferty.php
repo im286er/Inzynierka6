@@ -23,24 +23,16 @@ class Preferencje_Oferty
 
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Oferty")
-     * @ORM\JoinColumn(name="oferta", referencedColumnName="idOferty")
+     * @ORM\ManyToOne(targetEntity="Oferty",inversedBy="preferencja")
+     * @ORM\JoinColumn(name="oferta", referencedColumnName="id_oferty", onDelete="CASCADE")
      */
     protected $oferta;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Preferencje")
-     * @ORM\JoinColumn(name="preferencja", referencedColumnName="idPreferencje")
+     * @ORM\ManyToOne(targetEntity="Preferencje",inversedBy="oferta")
+     * @ORM\JoinColumn(name="preferencja", referencedColumnName="id_preferencje", onDelete="CASCADE")
      */
     protected $preferencja;
-
-
-
-
-
-  
 
     /**
      * Get idPreferencje

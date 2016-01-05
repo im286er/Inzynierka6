@@ -25,12 +25,12 @@ class NoweOgloszenieController extends Controller
     {
 
         $Preferencje_Oferty = new Preferencje_Oferty();
-        $Preferencje_Oferty->setOferta($Oferta->getIdOferty());
+        $Preferencje_Oferty->setOferta($Oferta);
         $Repository = $this->getDoctrine()
             ->getRepository('AppBundle:Preferencje');
         $Preferencje_Oferty->setPreferencja($Repository->findOneBy(
             array('TypPreferencji' => $string)
-        )->getIdPreferencje());
+        ));
         $em = $this->getDoctrine()->getManager();
         $em->persist($Preferencje_Oferty);
         $em->flush();
@@ -39,12 +39,12 @@ class NoweOgloszenieController extends Controller
     {
 
         $Wyposazenie_Oferty = new Wyposazenie_Oferty();
-        $Wyposazenie_Oferty->setOferta($Oferta->getIdOferty());
+        $Wyposazenie_Oferty->setOferta($Oferta);
         $Repository = $this->getDoctrine()
             ->getRepository('AppBundle:Wyposazenie');
         $Wyposazenie_Oferty->setWyposazenie($Repository->findOneBy(
             array('nazwawyposazenia' => $string)
-        )->getIdwyposazenie());
+        ));
         $em = $this->getDoctrine()->getManager();
         $em->persist($Wyposazenie_Oferty);
         $em->flush();

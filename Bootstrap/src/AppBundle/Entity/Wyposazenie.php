@@ -26,6 +26,11 @@ class Wyposazenie
      */
     protected $nazwawyposazenia;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Wyposazenie_Oferty", mappedBy="wyposazenie")
+     */
+    protected $oferta;
+
 
     /**
      * Get idwyposazenie
@@ -59,5 +64,46 @@ class Wyposazenie
     public function getNazwawyposazenia()
     {
         return $this->nazwawyposazenia;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->oferta = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ofertum
+     *
+     * @param \AppBundle\Entity\Wyposazenie_Oferty $ofertum
+     *
+     * @return Wyposazenie
+     */
+    public function addOfertum(\AppBundle\Entity\Wyposazenie_Oferty $ofertum)
+    {
+        $this->oferta[] = $ofertum;
+
+        return $this;
+    }
+
+    /**
+     * Remove ofertum
+     *
+     * @param \AppBundle\Entity\Wyposazenie_Oferty $ofertum
+     */
+    public function removeOfertum(\AppBundle\Entity\Wyposazenie_Oferty $ofertum)
+    {
+        $this->oferta->removeElement($ofertum);
+    }
+
+    /**
+     * Get oferta
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOferta()
+    {
+        return $this->oferta;
     }
 }
