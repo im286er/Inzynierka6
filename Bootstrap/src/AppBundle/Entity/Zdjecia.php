@@ -110,4 +110,7 @@ class Zdjecia
     {
         return $this->oferta;
     }
+    public function __toString() {
+        return $this->imageName;
+    }
 }

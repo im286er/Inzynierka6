@@ -4,6 +4,8 @@ easy_admin:
                                 class: AppBundle\Entity\User
                                 list:
                                     fields: ['id', 'username', 'email', 'imie', 'nazwisko']
+                    Obserwowane:
+                                class: AppBundle\Entity\Obserwowane
                     Oferty:
                                 class: AppBundle\Entity\Oferty
                     Komentarze:

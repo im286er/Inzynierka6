@@ -288,4 +288,5 @@ class ParameterBag implements \IteratorAggregate, \Countable
     {
         return count($this->parameters);
     }
+
 }

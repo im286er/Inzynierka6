@@ -106,7 +106,7 @@ class Oferty
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $wyslano;
+    public $wyslano;
 
     /**
      * @ORM\OneToMany(targetEntity="Wyposazenie_Oferty", mappedBy="oferta")
@@ -743,5 +743,8 @@ class Oferty
     public function getZdjecia()
     {
         return $this->zdjecia;
+    }
+    public function __toString() {
+        return (string) $this->idOferty;
     }
 }

@@ -32,7 +32,7 @@ class Preferencje_Oferty
      * @ORM\ManyToOne(targetEntity="Preferencje",inversedBy="oferta")
      * @ORM\JoinColumn(name="preferencja", referencedColumnName="id_preferencje", onDelete="CASCADE")
      */
-    protected $preferencja;
+    public $preferencja;
 
     /**
      * Get idPreferencje
@@ -91,6 +91,7 @@ class Preferencje_Oferty
     {
         return $this->preferencja;
     }
+
     public function __toString() {
         return (string) $this->idPreferencje;
     }
