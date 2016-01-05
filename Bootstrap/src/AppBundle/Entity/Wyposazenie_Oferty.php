@@ -91,4 +91,7 @@ class Wyposazenie_Oferty
     {
         return $this->wyposazenie;
     }
+    public function __toString() {
+        return (string) $this->idWyposazenie;
+    }
 }

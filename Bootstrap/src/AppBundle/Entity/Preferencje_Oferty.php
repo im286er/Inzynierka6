@@ -91,4 +91,7 @@ class Preferencje_Oferty
     {
         return $this->preferencja;
     }
+    public function __toString() {
+        return (string) $this->idPreferencje;
+    }
 }

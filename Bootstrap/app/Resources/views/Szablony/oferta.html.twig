@@ -17,7 +17,7 @@
                                             <div class="col-sm-12" id="carousel-bounding-box">
                                                 <div class="carousel slide" id="myCarousel">
                                                     <!-- Carousel items -->
-                                                    <div class="carousel-inner">
+                                                    <div class="carousel-inner" id="karuselka">
                                                         {% if zdjecia!=null %}
                                                             {% for zdj in zdjecia %}
 
@@ -26,7 +26,7 @@
                                                                 {% else %}
                                                                     <div class="item" data-slide-number="0">
                                                                 {% endif %}
-                                                                        <a><img class="thumbnail img-responsive"src="{{ asset(zdj.imagePath) }}" /></a>
+                                                                        <a ><img  class="thumbnail img-responsive "src="{{ asset(zdj.imagePath) }}" /></a>
                                                                  </div>
                                                             {% endfor %}
                                                         {% endif %}
@@ -152,8 +152,9 @@
 
 
     <style>
-        img{
-
+        #karuselka{
+            width:300px;
+            height:200px;
         }
         .modal-dialog {
             width:1100px;
