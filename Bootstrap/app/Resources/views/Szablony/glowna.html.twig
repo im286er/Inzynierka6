@@ -86,11 +86,17 @@
         <div class="carousel-inner">
             <div class="item active">
                 {% for oferta in pagination %}
+            {% if loop.index0<4 %}
+
                 <ul class="thumbnails">
                     <li class="col-sm-3">
                         <div class="fff">
                             <div class="thumbnail">
+                                {% if zdjecia[loop.index0]!=null %}
+                                <a href="#"><img src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
+                                {% else %}
                                 <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                                {% endif %}
                             </div>
                             <div class="caption">
                                 <h4>{{ oferta.tytul }}</h4>
@@ -100,9 +106,35 @@
                         </div>
                     </li>
                 </ul>
+            {% endif %}
                 {% endfor %}
-            </div><!-- /Slide1 -->
+            <!-- /Slide1 -->
+            </div>
+            <div class="item">
+                {% for oferta in pagination %}
+                    {% if loop.index0>3 %}
 
+                    <ul class="thumbnails">
+                        <li class="col-sm-3">
+                            <div class="fff">
+                                <div class="thumbnail">
+                                    {% if zdjecia[loop.index0]!=null %}
+                                        <a href="#"><img src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
+                                    {% else %}
+                                        <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                                    {% endif %}
+                                </div>
+                                <div class="caption">
+                                    <h4>{{ oferta.tytul }}</h4>
+                                    <p>{{ oferta.kategoria }} Cena: {{ oferta.cena }}</p>
+                                    <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}">Zobacz więcej</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
 
