@@ -52,12 +52,27 @@ class ProfileController extends Controller
                 ->setParameter('user', $this->getUser()->getID())
                 ->getQuery();
 
-        $logger = $this->get('logger');
-        $logger->info('I just got the logger');
-
-
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
+            $dql, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+
+        // $logger = $this->get('logger');
+        // $logger->info('I just got the logger');
+
+        //Komentarze
+        $result = $em->createQueryBuilder();
+        $dql=$result->select('k')
+            ->from('AppBundle:Komentarze', 'k')
+            ->andWhere('k.user_profil = :user')
+            ->setParameter('user', $this->getUser())
+            ->getQuery();
+
+
+        $pagi_komentarze = $paginator->paginate(
             $dql, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             5/*limit per page*/
@@ -65,6 +80,7 @@ class ProfileController extends Controller
         return $this->render(':Szablony:profil.html.twig', array(
             'user' => $user,
             'pagination' => $pagination,
+            'komentarze'=> $pagi_komentarze
         ));
     }
 

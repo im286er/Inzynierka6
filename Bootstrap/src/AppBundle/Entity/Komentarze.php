@@ -41,6 +41,11 @@ class Komentarze
     protected $komentarz;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    public $wyslano;
+
+    /**
      * Get id
      *
      * @return integer
@@ -120,5 +125,29 @@ class Komentarze
     public function getKomentarz()
     {
         return $this->komentarz;
+    }
+
+    /**
+     * Set wyslano
+     *
+     * @param \DateTime $wyslano
+     *
+     * @return Komentarze
+     */
+    public function setWyslano()
+    {
+        $this->wyslano = new \DateTime("now");
+
+        return $this;
+    }
+
+    /**
+     * Get wyslano
+     *
+     * @return \DateTime
+     */
+    public function getWyslano()
+    {
+        return $this->wyslano;
     }
 }

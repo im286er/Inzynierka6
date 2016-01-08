@@ -31,7 +31,10 @@
         <div class="row">
             <h1 class="page-header text-center">Komentarze</h1>
             <!-- /col-sm-12 -->
+
+
             <div class="col-sm-12">
+                {% for kom in komentarze %}
                 <div class="col-sm-1">
                     <div class="thumbnail">
                         <a href="{{ path('_profil', {'id': 'x'}) }}"><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
@@ -41,16 +44,20 @@
                 <div class="col-sm-11">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <strong>użytkownik</strong>
-                            <span class="text-muted col-sm-offset-9">dodano 5 dni temu</span>
+                            <a href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}">
+                            <strong>{{ kom.userKomentujacy}}</strong></a>
+                            <span class="text-muted col-sm-offset-9">{{kom.wyslano|date('d-m-Y H:i:s') }}</span>
                         </div>
                         <div class="panel-body">
-                            <p>komentarz</p>
+                            <p>{{kom.komentarz}}</p>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
+                {{ knp_pagination_render(komentarze) }}
                 <button class="btn btn-primary col-sm-2 col-sm-offset-10" id="confirm">Dodaj komentarz</button>
             </div>
+
         </div>
     </div>
 
