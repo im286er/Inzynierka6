@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="komenty">
             <h1 class="page-header text-center">Komentarze</h1>
             <!-- /col-sm-12 -->
 
@@ -37,14 +37,14 @@
                 {% for kom in komentarze %}
                 <div class="col-sm-1">
                     <div class="thumbnail">
-                        <a href="{{ path('_profil', {'id': 'x'}) }}"><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+                        <a href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}"><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
                     </div><!-- /thumbnail -->
                 </div><!-- /col-sm-1 -->
 
                 <div class="col-sm-11">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}">
+                            <a id="prof" href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}">
                             <strong>{{ kom.userKomentujacy}}</strong></a>
                             <span class="text-muted col-sm-offset-9">{{kom.wyslano|date('d-m-Y H:i:s') }}</span>
                         </div>

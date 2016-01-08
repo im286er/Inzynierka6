@@ -4,7 +4,13 @@
 #kontener{
     position: relative;
     top: 60px;
+    padding-bottom: 80px;
 }
+#prof{
+    color: black;
+}
+
+
 .thumbnail {
     padding:0px;
 }

@@ -30,20 +30,20 @@
                     </div>
                 </div>
                 <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-                    <div class="btn-group" role="group">
-                        <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <div class="btn-group active" role="group">
+                       <a href="#tab1" data-toggle="tab" class="text-center btn btn-primary text-center"><span class="glyphicon glyphicon-user center-block" aria-hidden="true"></span>
                             <div class="hidden-xs">O mnie</div>
-                        </button>
+                        </a>
                     </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    <div class="btn-group" role="group text-center">
+                        <a href="#tab2" class="btn btn-primary text-center"><span class="glyphicon glyphicon-heart center-block" aria-hidden="true"></span>
                             <div class="hidden-xs">Obserwowane oferty</div>
-                        </button>
+                        </a>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        <a href="#tab3" data-toggle="tab" class="text-center btn btn-primary text-center"><span class="glyphicon glyphicon-comment center-block" aria-hidden="true"></span>
                             <div class="hidden-xs">Komentarze</div>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -122,4 +122,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            if(location.hash) {
+                $('a[href=' + location.hash + ']').tab('show');
+            }
+            $(document.body).on("click", "a[data-toggle]", function(event) {
+                location.hash = this.getAttribute("href");
+            });
+        });
+        $(window).on('popstate', function() {
+            var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
+            $('a[href=' + anchor + ']').tab('show');
+        });
+    </script>
 {% endblock fos_user_content %}
