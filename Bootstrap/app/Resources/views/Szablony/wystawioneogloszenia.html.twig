@@ -42,10 +42,15 @@
             </table>
                 {# display navigation #}
 
-                    {{ knp_pagination_render(pagination) }}
+                    <div class="pull-right">{{ knp_pagination_render(pagination) }}</div>
 
-                <div class="row col-sm-offset-10"><a href="{{ path('fos_user_profile_show') }}" class="text-center new-account"><h4>Powrót do profilu</h4></a></div>
+
         </div>
+        <div class="row">
+                    <div class="pull-right">
+                        <a href="{{ path('fos_user_profile_show') }}" class="text-center"><h4>Powrót do profilu</h4></a>
+                    </div>
+                </div>
         </div>
 
 

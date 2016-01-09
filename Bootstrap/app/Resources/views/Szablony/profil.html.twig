@@ -30,21 +30,11 @@
                     </div>
                 </div>
                 <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-                    <div class="btn-group active" role="group">
-                       <a href="#tab1" data-toggle="tab" class="text-center btn btn-primary text-center"><span class="glyphicon glyphicon-user center-block" aria-hidden="true"></span>
-                            <div class="hidden-xs">O mnie</div>
-                        </a>
-                    </div>
-                    <div class="btn-group" role="group text-center">
-                        <a href="#tab2" class="btn btn-primary text-center"><span class="glyphicon glyphicon-heart center-block" aria-hidden="true"></span>
-                            <div class="hidden-xs">Obserwowane oferty</div>
-                        </a>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <a href="#tab3" data-toggle="tab" class="text-center btn btn-primary text-center"><span class="glyphicon glyphicon-comment center-block" aria-hidden="true"></span>
-                            <div class="hidden-xs">Komentarze</div>
-                        </a>
-                    </div>
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a data-toggle="pill" href="#tab1"><span class="glyphicon glyphicon-user center-block" aria-hidden="true"></span><div class="hidden-xs">O mnie</div></a></li>
+                        <li><a data-toggle="pill" href="#tab2"><span class="glyphicon glyphicon-heart center-block" aria-hidden="true"></span><div class="hidden-xs">Obserwowane oferty</div></a></li>
+                        <li><a data-toggle="pill" href="#tab3"><span class="glyphicon glyphicon-comment center-block" aria-hidden="true"></span><div class="hidden-xs">Komentarze</div></a></li>
+                    </ul>
                 </div>
 
                 <div class="well">
@@ -92,29 +82,31 @@
                             </table>
                             {# display navigation #}
 
-                            {{ knp_pagination_render(pagination) }}
+                            <div class="pull-right">{{ knp_pagination_render(pagination) }}</div>
                         </div>
-                        <div class="tab-pane fade in" id="tab3">
-                            <ul class="media-list">
-                                {% for kom in komentarze %}
-                                    <li class="media">
-                                        <a class="pull-left" href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}">
-                                            <img class="media-object img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile">
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="well well-lg">
-                                                <a href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}">
-                                                    <h4 class="media-heading text-uppercase reviews">{{ kom.userKomentujacy }} </h4>
-                                                </a>
-                                                <p class="media-comment">
-                                                    {{ kom.komentarz }}
-                                                </p>
-                                            </div>
+                        <div class="tab-pane fade in clearfix" id="tab3">
+                            {% for kom in komentarze %}
+                                <div class="col-sm-1">
+                                    <div class="thumbnail">
+                                        <a href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}"><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a>
+                                    </div><!-- /thumbnail -->
+                                </div><!-- /col-sm-1 -->
+
+                                <div class="col-sm-11">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <a id="prof" href="{{ path('_profil', {'id': kom.userKomentujacy.id}) }}">
+                                                <strong>{{ kom.userKomentujacy}}</strong></a>
+                                            <span class="text-muted col-sm-offset-9">{{kom.wyslano|date('d-m-Y H:i:s') }}</span>
                                         </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                            {{ knp_pagination_render(komentarze) }}
+                                        <div class="panel-body">
+                                            <p>{{kom.komentarz}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="pull-right">{{ knp_pagination_render(komentarze) }}</div>
+
                         </div>
                     </div>
                 </div>
@@ -134,7 +126,7 @@
         });
         $(window).on('popstate', function() {
             var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
-            $('a[href=' + anchor + ']').tab('show');
+            $('a[href=' + anchor +  ']').tab('show');
         });
     </script>
 {% endblock fos_user_content %}

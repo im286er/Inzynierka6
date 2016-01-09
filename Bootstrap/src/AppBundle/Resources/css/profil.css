@@ -1,6 +1,7 @@
 #kontener{
     position: relative;
     top: 60px;
+    padding-bottom: 80px;
 }
 .card {
     margin-top: 20px;
