@@ -28,7 +28,7 @@ class WystawioneOgloszeniaController extends Controller
         );
 
         // parameters to template
-        return $this->render(':Szablony:wystawioneogloszenia.html.twig', array(
+        return $this->render(':Szablony/profil:wystawioneogloszenia.html.twig', array(
                 'pagination' => $pagination,
 
         ));

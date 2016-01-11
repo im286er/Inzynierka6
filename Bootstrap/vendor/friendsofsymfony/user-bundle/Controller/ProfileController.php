@@ -77,7 +77,7 @@ class ProfileController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5/*limit per page*/
         );
-        return $this->render(':Szablony:profil.html.twig', array(
+        return $this->render(':Szablony/profil:profil.html.twig', array(
             'user' => $user,
             'pagination' => $pagination,
             'komentarze'=> $pagi_komentarze
@@ -136,7 +136,7 @@ class ProfileController extends Controller
 
 
 
-        return $this->render(':Szablony:edycjaprofilu.html.twig', array(
+        return $this->render(':Szablony/profil:edycjaprofilu.html.twig', array(
             'form' => $form->createView()
 
         ));

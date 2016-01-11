@@ -150,4 +150,7 @@ class Komentarze
     {
         return $this->wyslano;
     }
+    public function __toString() {
+        return (string) $this->id;
+    }
 }

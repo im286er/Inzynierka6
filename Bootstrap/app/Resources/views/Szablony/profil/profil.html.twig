@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block fos_user_content %}
+    {% stylesheets '@AppBundle/Resources/css/profil.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    <script>
+        $(document).ready(function() {
+            $(".btn-pref .btn").click(function () {
+                $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+                // $(".tab").addClass("active"); // instead of this do the below
+                $(this).removeClass("btn-default").addClass("btn-primary");
+            });
+        });
+    </script>
+
+    <div class="fos_user_user_show">
+        <div class="container" id="kontener">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card hovercard">
+                    <div class="card-background">
+                        <img class="card-bkimg" alt="" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                        <!-- http://lorempixel.com/850/280/people/9/ -->
+                    </div>
+                    <div class="useravatar">
+                        <img alt="" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    </div>
+                    <div class="card-info"> <span class="card-title">{{ user.username }}</span>
+
+                    </div>
+                </div>
+                <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user center-block" aria-hidden="true"></span><div class="hidden-xs">O mnie</div></a></li>
+                        <li><a href="{{ path('ObserwowaneOgloszenia') }}"><span class="glyphicon glyphicon-heart center-block" aria-hidden="true"></span><div class="hidden-xs">Obserwowane oferty</div></a></li>
+                        <li><a href="{{ path('KomentarzeProfil') }}"><span class="glyphicon glyphicon-comment center-block" aria-hidden="true"></span><div class="hidden-xs">Komentarze</div></a></li>
+                    </ul>
+                </div>
+
+                <div class="well">
+                    <div class="tab-content clearfix">
+                            <div class="col-sm-3 text-center">
+                                <div class="row"><a href="{{ path('fos_user_profile_edit') }}" class="text-center new-account"><span class="glyphicon glyphicon-wrench"></span> Edytuj dane osobowe</a></div>
+                                <div class="row"><a href="{{ path('fos_user_change_password') }}" class="text-center new-account"><span class="glyphicon glyphicon-wrench"></span> Zmień hasło</a></div>
+                                <div class="row"><a href="{{ path('App_MojeWystawioneOgloszenia') }}" class="text-center new-account"><span class="glyphicon glyphicon-list-alt"></span> Wystawione ogłoszenia</a></div>
+                            </div>
+                            <div class="col-sm-3" id="tab11">
+                                <h4>Informacje o mnie</h4>
+                                <p>Imie i nazwisko: {{ user.imie }} {{ user.nazwisko }}</p>
+                                <p>Nazwa użytkownika: {{ user.username }}</p>
+                            </div>
+                            <div class="col-sm-3" id="tab11">
+                                <h4>Dane kontaktowe</h4>
+                                <p>Adres email: {{ user.email }}</p>
+                                <p>Numer telefonu: {{ user.telefon }}</p>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

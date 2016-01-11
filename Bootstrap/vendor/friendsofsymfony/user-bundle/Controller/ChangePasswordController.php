@@ -76,7 +76,7 @@ class ChangePasswordController extends Controller
             return $response;
         }
 
-        return $this->render(':Szablony:changepassword.html.twig', array(
+        return $this->render(':Szablony/profil:changepassword.html.twig', array(
             'form' => $form->createView()
         ));
     }

@@ -21,6 +21,9 @@ img{
     height:100%;
     vertical-align: middle;
     float:none;
+    max-width:360px;
+    max-height:240px;
+
 }
 .vertical-center {
     position: relative;
@@ -31,8 +34,6 @@ img{
 
 /* Global */
 
-
-img { max-width:100%; }
 
 a {
     -webkit-transition: all 150ms ease;
