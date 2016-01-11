@@ -21,11 +21,12 @@ class LoadUsers implements FixtureInterface, ContainerAwareInterface, OrderedFix
         $this->container = $container;
     }
 
+
+
     public function load(ObjectManager $manager)
     {
         // Get our userManager, you must implement `ContainerAwareInterface`
         $userManager = $this->container->get('fos_user.user_manager');
-
         // Create our user and set details
         $user = $userManager->createUser();
         $user->setUsername('admin');
@@ -36,7 +37,20 @@ class LoadUsers implements FixtureInterface, ContainerAwareInterface, OrderedFix
         $user->setNazwisko('admin');
         $user->setTelefon(132);
         $user->setRoles(array('ROLE_ADMIN'));
+        // Update the user
+        $userManager->updateUser($user, true);
 
+        $userManager = $this->container->get('fos_user.user_manager');
+        // Create our user and set details
+        $user = $userManager->createUser();
+        $user->setUsername('user');
+        $user->setEmail('user@domain.com');
+        $user->setPlainPassword('user');
+        $user->setEnabled(true);
+        $user->setImie('Jan');
+        $user->setNazwisko('Kowalski');
+        $user->setTelefon(132);
+        $user->setRoles(array('ROLE_USER'));
         // Update the user
         $userManager->updateUser($user, true);
     }

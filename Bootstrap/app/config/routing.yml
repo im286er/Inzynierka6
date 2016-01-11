@@ -31,6 +31,9 @@ _profil:
 _ofertyuser:
          path:   /profil/{id}/oferty
          defaults:  { _controller: AppBundle:OfertyUzytkownika:show}
+_search:
+         path:   /search?q="{search}"co="{cenaod}"cd="{cenado}"
+         defaults:  { _controller: AppBundle:Search:list}
 
 
 

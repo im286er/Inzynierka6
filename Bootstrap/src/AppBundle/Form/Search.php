@@ -14,8 +14,7 @@ class Search extends AbstractType
             'label' => false
             ))
             ->add('kategoria', 'choice', array(
-                'choices'  => array('mp' => 'Miejsce w pokoju', 'p' => 'Pokój',  'm' => 'Mieszkanie', 'k' => 'Kawalerka'  ),
-                'required' => false,
+                'choices'  => array('w'=>'Wszystkie','mp' => 'Miejsce w pokoju', 'p' => 'Pokój',  'm' => 'Mieszkanie', 'k' => 'Kawalerka'  ),
                 'label' => 'Kategoria: ',
             ))
             ->add('cenaod', 'number', array(

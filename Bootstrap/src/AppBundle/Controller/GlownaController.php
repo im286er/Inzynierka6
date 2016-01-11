@@ -15,7 +15,6 @@ class GlownaController extends Controller
     /**
      * @Route("", name="StronaGlowna")
      */
-
     public function newAction(Request $request)
     {
         $task = new SearchEntity();
@@ -48,10 +47,22 @@ class GlownaController extends Controller
             8/*limit per page*/
 
         );
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            $data = $form->getData();
+            $cenaod=$data['cenaod'];
+            $cenado=$data['cenado'];
+            return $this->redirectToRoute('_search', array(
+                'search' =>$data['search'],
+                'cenaod'=>$cenaod,
+                'cenado'=>$cenado
 
 
 
+            ));
 
+        }
         return $this->render(':Szablony:glowna.html.twig', array(
             'form' => $form->createView(),
             'pagination' => $pagination,
@@ -60,5 +71,6 @@ class GlownaController extends Controller
 
         ));
     }
+
 
 }

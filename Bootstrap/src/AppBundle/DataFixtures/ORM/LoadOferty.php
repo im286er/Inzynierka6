@@ -47,7 +47,7 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
         $oferta->setTyp('Blok');
         $oferta->setWolneod(new \DateTime("now"));
         $oferta->setWyslano();
-        $oferta->setTytul('Sprzedam super stancje');
+        $oferta->setTytul('Wynajme super stancje w '.$oferta->getMiasto());
 
         $Repository = $this->container->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User');
