@@ -21,9 +21,12 @@ img{
     height:100%;
     vertical-align: middle;
     float:none;
+
+
+}
+.imgg{
     max-width:360px;
     max-height:240px;
-
 }
 .vertical-center {
     position: relative;
