@@ -26,7 +26,11 @@ class Search extends AbstractType
                 'label' => false,
                 'required' => false
             ))
-            ->add('metraz', 'number', array(
+            ->add('metrazod', 'number', array(
+                'label' => false,
+                'required' => false,
+            ))
+            ->add('metrazdo', 'number', array(
                 'label' => false,
                 'required' => false,
             ));

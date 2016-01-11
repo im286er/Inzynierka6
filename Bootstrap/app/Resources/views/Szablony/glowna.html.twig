@@ -52,14 +52,21 @@
                             </div>
                         </div>
                         <div class="form group">
-                            {{ form_label(form.metraz, 'Metraż: ', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            {{ form_label(form.metrazod, 'Metraż: ', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
                             <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="metraz2">
-                                {{ form_widget(form.metraz, {'attr': {'class':'form-control'}}) }}
-                                {{ form_errors(form.metraz) }}
+                                {{ form_widget(form.metrazod, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                                {{ form_errors(form.metrazod) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.metrazdo) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="metraz2">
+                                {{ form_widget(form.metrazdo, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                                {{ form_errors(form.metrazdo) }}
                             </div>
                         </div>
                         <div class="pull-left">
-                            <div class="col-sm-offset-9">
+                            <div class="col-sm-offset-7">
                                 <button type="button" class="btn btn-md btn-warning" id="szukaj"><span class="glyphicon glyphicon-search"></span>Szukaj</button>
                             </div>
                         </div>
