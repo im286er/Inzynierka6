@@ -2,26 +2,18 @@
     margin-left: 0;
     margin-right: 0;
 }
-#Szukaj{
-    position: relative;
-    left:-200px;
-    width: 150px;
-}
-#cena{
-    position: relative;
-    right:35px;
-}
-#metraz{
-    position: relative;
-    right:80px;
-}
-#metraz2{
-    position: relative;
-    right:25px;
-}
+
 .thumbnail{
     height: 245px;
     width: 360px;
+}
+#szukaj{
+    position: relative;
+    left:-35px;
+
+}
+label {
+    margin-right: -20px;
 }
 img{
     resize: both;

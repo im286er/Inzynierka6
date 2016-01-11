@@ -17,56 +17,55 @@
             <div class="container" >
                 {{ form_start(form, {'attr': {'class': 'form-horizontal style-form', 'role': 'form'}}) }}
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-                        <div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-offset-3">
-                            <div class="form group">
-                                {{ form_label(form.search, '', {'label_attr': {'class': 'col-md-2 col-sm-2 col-lg-2 col-xs-2 control-label'}}) }}
-                                <div class="col-sm-5 col-md-5 col-md-5 col-lg-5 col-xs-5">
-                                    {{ form_widget(form.search, {'attr': {'class':'form-control' , 'placeholder' : 'czego szukasz?'}}) }}
-                                    {{ form_errors(form.search) }}
-                                </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12 col-sm-offset-2">
+                        <div class="form group">
+                            {{ form_label(form.search) }}
+                            <div class="col-sm-5 col-md-5 col-md-5 col-lg-5 col-xs-5">
+                                {{ form_widget(form.search, {'attr': {'class':'form-control' , 'placeholder' : 'czego szukasz?'}}) }}
+                                {{ form_errors(form.search) }}
                             </div>
-                            <div class="form group">
-                                {{ form_label(form.kategoria, 'Kategoria: ', {'label_attr': {'class': 'col-sm-1 col-md-1 col-lg-1 col-xs-1 control-label'}}) }}
-                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
-                                    {{ form_widget(form.kategoria, {'attr': {'class':'form-control'}}) }}
-                                    {{ form_errors(form.kategoria) }}
-                                </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.kategoria, 'Kategoria: ', {'label_attr': {'class': 'col-sm-1 col-md-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+                                {{ form_widget(form.kategoria, {'attr': {'class':'form-control'}}) }}
+                                {{ form_errors(form.kategoria) }}
                             </div>
                         </div>
                     </div>
                 </div>
                 <p></p>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                        <div class="col-sm-offset-1">
-
-                                <div class="form group">
-                                    {{ form_label(form.cenaod, 'Cena:', {'label_attr': {'class': 'col-md-3 col-sm-3 col-lg-3 col-xs-3 control-label'}}) }}
-                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6" id="cena">
-                                            {{ form_widget(form.cenaod, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
-                                            {{ form_errors(form.cenaod) }}
-                                        </div>
-                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6" id="cena">
-                                            {{ form_widget(form.cenado, {'attr': {'class':'form-control', 'placeholder' : 'do'}}) }}
-                                            {{ form_errors(form.cenado) }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form group" id="metraz">
-                                    {{ form_label(form.metraz, 'Metraż: ', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
-                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="metraz2">
-                                        {{ form_widget(form.metraz, {'attr': {'class':'form-control'}}) }}
-                                        {{ form_errors(form.metraz) }}
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-md btn-info " id="Szukaj"><span class="glyphicon glyphicon-search"></span>Szukaj</button>
-
-
+                    <div class="col-sm-12 col-sm-offset-2">
+                        <div class="form group">
+                            {{ form_label(form.cenaod, 'Cena:', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1">
+                                {{ form_widget(form.cenaod, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                                {{ form_errors(form.cenaod) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.cenado) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1">
+                                {{ form_widget(form.cenado, {'attr': {'class':'form-control', 'placeholder' : 'do'}}) }}
+                                {{ form_errors(form.cenado) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.metraz, 'Metraż: ', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="metraz2">
+                                {{ form_widget(form.metraz, {'attr': {'class':'form-control'}}) }}
+                                {{ form_errors(form.metraz) }}
+                            </div>
+                        </div>
+                        <div class="pull-left">
+                            <div class="col-sm-offset-9">
+                                <button type="button" class="btn btn-md btn-warning" id="szukaj"><span class="glyphicon glyphicon-search"></span>Szukaj</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 {{ form_end(form) }}
             </div>
         </div>
