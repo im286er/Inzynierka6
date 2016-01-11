@@ -62,9 +62,6 @@ class NoweOgloszenieController extends Controller
 
         if ($form->isValid()) {
 
-
-
-
             $data = $form->getData();
             $Oferta = new Oferty();
             $Oferta->setTytul($data["tytul"]);

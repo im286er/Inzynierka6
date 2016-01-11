@@ -8,10 +8,11 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Wyposazenie;
 
-class LoadWyposazenie implements FixtureInterface
+class LoadWyposazenie implements FixtureInterface, OrderedFixtureInterface
 {
     private function addWyposazenie($string,ObjectManager $manager )
     {
@@ -35,5 +36,9 @@ class LoadWyposazenie implements FixtureInterface
         $this->addWyposazenie("garaż",$manager);
 
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        return 3;
     }
 }

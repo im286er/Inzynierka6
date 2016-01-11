@@ -54,8 +54,11 @@ class ObserwujController extends Controller
             array('oferta' => $idOferty,
                   'user' => $user)
         );
-        $em->remove($oferta);
-        $em->flush();
+        if($oferta!=null)
+        {
+            $em->remove($oferta);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('fos_user_profile_show');
 

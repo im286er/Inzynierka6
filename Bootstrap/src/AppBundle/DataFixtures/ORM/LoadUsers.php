@@ -7,11 +7,12 @@
  */
 namespace AppBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUsers implements FixtureInterface, ContainerAwareInterface
+class LoadUsers implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $container;
 
@@ -38,5 +39,9 @@ class LoadUsers implements FixtureInterface, ContainerAwareInterface
 
         // Update the user
         $userManager->updateUser($user, true);
+    }
+    public function getOrder()
+    {
+        return 1;
     }
 }

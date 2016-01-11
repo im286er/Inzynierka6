@@ -34,7 +34,7 @@ class ObserwowaneController extends Controller
         $dql=$result->select('o')
             ->from('AppBundle:Oferty', 'o')
             ->innerJoin('o.obserwowane','w')
-            ->andWhere('o.user_id = :user')
+            ->andWhere('w.user = :user')
             ->setParameter('user', $this->getUser()->getID())
             ->getQuery();
 

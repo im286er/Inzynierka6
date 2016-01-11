@@ -9,10 +9,12 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Preferencje;
 
-class LoadPreferencje implements FixtureInterface
+
+class LoadPreferencje implements FixtureInterface, OrderedFixtureInterface
 {
     private function addPreference($string,ObjectManager $manager )
     {
@@ -30,5 +32,9 @@ class LoadPreferencje implements FixtureInterface
        $this->addPreference('pracujący',$manager);
 
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        return 2;
     }
 }
