@@ -36,24 +36,24 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
         $gen=new GeneratorOfert();
         $oferta = new Oferty();
         $oferta->setMiasto($gen->getMiasto());
-        $oferta->setUlica('Głęboka');
-        $oferta->setKategoria('Pokój');
+        $oferta->setUlica($gen->getUlica());
+        $oferta->setKategoria($gen->getKategoria());
         $oferta->setCena($gen->getCena());
         $oferta->setDzielnica($gen->getDzielnica());
         $oferta->setLiczbapokoi($gen->getLiczbaPokoi());
         $oferta->setMaksliczbosob($gen->getMaksLiczbaOsob());
         $oferta->setMetraz($gen->getMetraz());
         $oferta->setPietro($gen->getPietro());
-        $oferta->setTyp('Blok');
+        $oferta->setTyp($gen->getTyp());
         $oferta->setWolneod(new \DateTime("now"));
         $oferta->setWyslano();
-        $oferta->setTytul('Wynajme super stancje w '.$oferta->getMiasto());
+        $oferta->setTytul($gen->getTytuł());
 
         $Repository = $this->container->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User');
 
         $user=$Repository->findOneBy(
-            array('username' =>'admin'));
+            array('username' =>$gen->getUser()));
 
         $oferta->setUserId($user);
         $manager->persist($oferta);
@@ -62,7 +62,7 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 20; $i++)
+        for ($i = 1; $i <= 100; $i++)
         {
             $this->AddOferta($manager);
         }       

@@ -21,7 +21,9 @@ class ProfilUzytkownikaController extends Controller
 
     public function showAction(User $user,Request $request)
     {
-        $task = new Komentarz();
+        //Jeśli użytkownik otwiera swój własny profil to następuje przekierowanie do odpowiedniego kontrollera
+        if($user==$this->getUser())
+            return $this->redirectToRoute('fos_user_profile_show');
 
         $form = $this->createForm(new Komentarz());
         $form->handleRequest($request);
@@ -36,7 +38,7 @@ class ProfilUzytkownikaController extends Controller
             $Komentarz->setWyslano();
             $em->persist($Komentarz);
             $em->flush();
-
+            return $this->redirect($request->getUri());
         }
 
         //Komentarze
@@ -46,6 +48,7 @@ class ProfilUzytkownikaController extends Controller
             ->from('AppBundle:Komentarze', 'k')
             ->andWhere('k.user_profil = :user')
             ->setParameter('user', $user)
+            ->orderBy('k.wyslano', 'DESC')
             ->getQuery();
 
 

@@ -21,19 +21,22 @@ _obserwuj:
 _nieobserwuj:
          path:  /oferta/{idOferty}/nieobserwuj
          defaults: { _controller: AppBundle:Obserwuj:delete }
-
 _profil:
          path:   /profil/{id}
          defaults:  { _controller: AppBundle:ProfilUzytkownika:show }
-_profil:
-         path:   /profil/{id}/oferty
-         defaults:  { _controller: AppBundle:WystawioneOgloszenia:new}
 _ofertyuser:
          path:   /profil/{id}/oferty
          defaults:  { _controller: AppBundle:OfertyUzytkownika:show}
 _search:
-         path:   /search?q="{search}"co="{cenaod}"cd="{cenado}"
-         defaults:  { _controller: AppBundle:Search:list}
+         path:   /search/q={search},co={cenaod},cd={cenado},mo={metrazod},md={metrazdo},k={kategoria}
+         defaults:
+                  _controller: AppBundle:Search:list
+                  cenaod: 0
+                  cenado: 9999
+                  kategoria: all
+                  metrazod: 0
+                  metrazdo: 999
+
 
 
 

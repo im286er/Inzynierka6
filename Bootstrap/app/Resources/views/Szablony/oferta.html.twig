@@ -87,39 +87,44 @@
 
                 </div>
                     <div class="row">
-                    <div class="col-sm-12 well" id="studnie" >
-                        <div class="col-sm-4">
-                            <h3>Opłaty</h3>
-                            <p><strong>Cena za miesiąc: </strong>{{ oferty.cena }}</p>
-                            <p><strong>Dodatkowe opłaty na miesiąc:</strong>{{ oferty.dodatkoweoplaty }}</p>
-                            <p><strong>Kaucja:</strong>{{ oferty.kaucja }}</p>
-                            <p></p>
-                        </div>
-                    {% if wyposazenie!=null %}
-                        <div class="col-sm-4">
-                            <h3>Wyposażenie</h3>
-                            {% for wyp in wyposazenie %}
-                                   <lu class=""> {{ wyp }},</lu>
-                                {% endfor %}
+                        <div class="col-sm-12 well" id="studnie" >
+                            <div class="col-sm-4">
+                                <h3>Opłaty</h3>
+                                <p><strong>Cena za miesiąc: </strong>{{ oferty.cena }}</p>
+                                <p><strong>Dodatkowe opłaty na miesiąc:</strong>{{ oferty.dodatkoweoplaty }}</p>
+                                <p><strong>Kaucja:</strong>{{ oferty.kaucja }}</p>
+                                <p></p>
+                            </div>
+
+                            {% if wyposazenie!=null %}
+                                <div class="col-sm-4">
+                                    <h3>Wyposażenie</h3>
+                                    {% for wyp in wyposazenie %}
+                                           <lu class=""> {{ wyp }},</lu>
+                                    {% endfor %}
+                                </div>
                             {% endif %}
                             {% if preferencje!=null %}
-                            <h3>Współlokatorzy</h3>
-                            {% for pref in preferencje %}
-                            <lu> {{ pref }},</lu>
-                            {% endfor %}</p>
+                                <div class="col-sm-4">
+                                    <h3>Współlokatorzy</h3>
+                                    {% for pref in preferencje %}
+                                        <lu> {{ pref }},</lu>
+                                    {% endfor %}
+                                </div>
                             {% endif %}
+
+                            <div class="col-sm-4">
+                                    <h3>Opis</h3>
+                                    <div id="opis2"><lu> {{ oferty.opis|striptags }}</lu></div>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                                <h3>Opis</h3>
-                                <div id="opis2"><lu> {{ oferty.opis|striptags }}</lu></div>
+                        <div id="dol">
+                            <p class="text-right col-sm-offset-8"><strong>Wyświetleń: </strong>{{  oferty.views }}</p>
+                            <a href="#"><p class="text-right col-sm-offset-8"><strong>Zgłoś naruszenie zasad</strong></p></a>
                         </div>
                     </div>
-                </div>
-                    <div id="dol">
-                    <p class="text-right col-sm-offset-8"><strong>Wyświetleń: </strong>{{  oferty.views }}</p>
-                    <a href="#"><p class="text-right col-sm-offset-8"><strong>Zgłoś naruszenie zasad</strong></p></a></div>
-                </div>
 
+                </div>
 
             </div>
             <div class="modal" id="myModal" role="dialog">
@@ -136,7 +141,7 @@
 
                                 </div>
 
-                                <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                <a class="carousel-control left" href="#modalCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
                                 <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 
                             </div>

@@ -35,6 +35,7 @@ class KomentarzeController extends Controller
             ->from('AppBundle:Komentarze', 'k')
             ->andWhere('k.user_profil = :user')
             ->setParameter('user', $this->getUser())
+            ->orderBy('k.wyslano', 'DESC')
             ->getQuery();
 
         $paginator  = $this->get('knp_paginator');

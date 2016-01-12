@@ -21,9 +21,9 @@ class OfertyUzytkownikaController extends Controller
      * @Route("/profil/{id}/oferty", name="OfertyUzytkownika")
      */
 
-    public function listAction(Request $request){
+    public function listAction(User $user,Request $request){
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM AppBundle:Oferty a";
+        $dql   = "SELECT a FROM AppBundle:Oferty a WHERE a.user_id=".$user->getID();
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -34,7 +34,10 @@ class OfertyUzytkownikaController extends Controller
         );
 
         // parameters to template
-        return $this->render(':Szablony:wystawioneogloszeniauzytkownika.html.twig', array('pagination' => $pagination));
+        return $this->render(':Szablony:wystawioneogloszeniauzytkownika.html.twig', array(
+            'pagination' => $pagination,
+            'user' => $user
+        ));
     }
 
 

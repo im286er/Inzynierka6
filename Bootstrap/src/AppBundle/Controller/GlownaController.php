@@ -23,7 +23,7 @@ class GlownaController extends Controller
         $em    = $this->get('doctrine.orm.entity_manager');
 
         $dql   = "SELECT o FROM AppBundle:Oferty o ORDER BY o.views DESC";
-        $query = $em->createQuery($dql);
+        $query = $em->createQuery($dql)->setMaxResults(8);
 
         //Pobieranie zdjęć
         $oferty = $query->getResult();
@@ -51,14 +51,34 @@ class GlownaController extends Controller
         if ($form->isValid())
         {
             $data = $form->getData();
-            $cenaod=$data['cenaod'];
-            $cenado=$data['cenado'];
+
+
+            if($data['cenaod']!=null)
+                $cenaod=$data['cenaod'];
+            else
+                $cenaod=0;
+            if($data['cenado']!=null)
+                $cenado=$data['cenado'];
+            else
+                $cenado=9999;
+
+            if($data['metrazod']!=null)
+                $metrazod=$data['metrazod'];
+            else
+                $metrazod=0;
+            if($data['metrazdo']!=null)
+                $metrazdo=$data['metrazdo'];
+            else
+                $metrazdo=999;
+
+
             return $this->redirectToRoute('_search', array(
                 'search' =>$data['search'],
                 'cenaod'=>$cenaod,
-                'cenado'=>$cenado
-
-
+                'cenado'=>$cenado,
+                'metrazod'=>$metrazod,
+                'metrazdo'=>$metrazdo,
+                'kategoria'=>$data['kategoria']
 
             ));
 

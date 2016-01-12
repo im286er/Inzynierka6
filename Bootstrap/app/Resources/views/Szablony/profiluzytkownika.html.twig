@@ -23,7 +23,7 @@
                                 <br />
                                 <i class="glyphicon glyphicon-phone"></i> {{ user.telefon }}
                         </div>
-                        <div class="col-sm-6 col-sm-offset-5"><button class="btn btn-primary"><a href="{{ path ('_ofertyuser', {'id': user.id}) }}" class="text-center new-account">Wystawione ogłoszenia użytkownika {{ user.username }} </a></button></div>
+                        <div class="col-sm-6 col-sm-offset-5"><a class="btn btn-primary" href="{{ path ('_ofertyuser', {'id': user.id}) }}" class="text-center new-account">Wystawione ogłoszenia użytkownika {{ user.username }} </a></div>
                     </div>
                 </div>
             </div>

@@ -29,10 +29,12 @@
                     {% endfor %}
             </table>
                 {# display navigation #}
-                <div class="navigation col-sm-offset-11">
+                <div class="navigation col-sm">
                     {{ knp_pagination_render(pagination) }}
                 </div>
-                <div class="row col-sm-offset-10"><a href="" class="text-center new-account"><h4>Powrót do profilu użytkownika ###</h4></a></div>
+                <div class="pull-right">
+                    <a href="{{ path ('_profil', {'id': user.id}) }}" class="btn btn-primary"><h5>Powrót do profilu użytkownika {{ user.username }}</h5></a>
+                </div>
         </div>
         </div>
     </div>
