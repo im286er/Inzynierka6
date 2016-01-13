@@ -7,37 +7,109 @@
             top: 60px;
         }
     </style>
-    <div class="container" id="kontener">
-        <div class="col-sm-12">
-        <h1 class="page-header text-center">Wyniki wyszukiwania</h1>
-            <table class="table">
-                    <tr>
-                        {# sorting of properties based on query components #}
-                        <th{% if pagination.isSorted('a.tytul') %} class="sorted"{% endif %}>
-                        Tytuł</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Kategoria', 'o.kategoria') }}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Metraz^', 'o.metraz',{'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'o.metraz', {'direction': 'desc'})}}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Cena ^', 'o.cena', {'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'o.cena', {'direction': 'desc'})}}</th>
-                    </tr>
-
-                    {# table body #}
-                    {% for oferta in pagination %}
-                        <tr {% if loop.index is odd %}class="color"{% endif %}>
-                            <td><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"> {{ oferta.tytul }}</a></td>
-                            <td>{{ oferta.kategoria }}</td>
-                            <td>{{ oferta.metraz }}<small>m<sup>2</sup></small></td>
-                            <td>{{ oferta.cena }}zł/miesiąc</td>
-                        </tr>
-                    {% endfor %}
-            </table>
-                {# display navigation #}
-                <div class="navigation col-sm">
-                    {{ knp_pagination_render(pagination) }}
+    <div class="jumbotron text-center">
+        <h1>Cztery Ściany</h1>
+        <p>System wspomagania wynajmu stancji</p>
+        <div class="row">
+            <div class="container" >
+                {{ form_start(form, {'attr': {'class': 'form-horizontal style-form', 'role': 'form'}}) }}
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12 col-sm-offset-2">
+                        <div class="form group">
+                            {{ form_label(form.search) }}
+                            <div class="col-sm-5 col-md-5 col-md-5 col-lg-5 col-xs-5">
+                                {{ form_widget(form.search, {'attr': {'class':'form-control' , 'placeholder' : 'czego szukasz?'}}) }}
+                                {{ form_errors(form.search) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.kategoria, 'Kategoria: ', {'label_attr': {'class': 'col-sm-1 col-md-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+                                {{ form_widget(form.kategoria, {'attr': {'class':'form-control'}}) }}
+                                {{ form_errors(form.kategoria) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-        </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-2">
+                        <div class="form group">
+                            {{ form_label(form.cenaod, 'Cena:', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1">
+                                {{ form_widget(form.cenaod, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                                {{ form_errors(form.cenaod) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.cenado) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1">
+                                {{ form_widget(form.cenado, {'attr': {'class':'form-control', 'placeholder' : 'do'}}) }}
+                                {{ form_errors(form.cenado) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.metrazod, 'Metraż: ', {'label_attr': {'class': 'col-md-1 col-sm-1 col-lg-1 col-xs-1 control-label'}}) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="metraz2">
+                                {{ form_widget(form.metrazod, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                                {{ form_errors(form.metrazod) }}
+                            </div>
+                        </div>
+                        <div class="form group">
+                            {{ form_label(form.metrazdo) }}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="metraz2">
+                                {{ form_widget(form.metrazdo, {'attr': {'class':'form-control', 'placeholder' : 'od'}}) }}
+                                {{ form_errors(form.metrazdo) }}
+                            </div>
+                        </div>
+                        <div class="pull-left">
+                            <div class="col-sm-offset-7">
+                                <button type="submit" class="btn btn-md btn-warning" id="szukaj"><span class="glyphicon glyphicon-search"></span>Szukaj</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
+
+    <div class="container">
+
+        {% if pagination.getTotalItemCount==0 %}
+            <h1 class="page-header text-center">Nie udało się znaleźć wyników spełniających podane kryteria</h1>
+        {% else %}
+        <div class="col-sm-12">
+            <h1 class="page-header text-center">Wyniki wyszukiwania</h1>
+                <table class="table">
+                        <tr>
+                            {# sorting of properties based on query components #}
+                            <th{% if pagination.isSorted('a.tytul') %} class="sorted"{% endif %}>
+                            Tytuł</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Kategoria', 'o.kategoria') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Metraz^', 'o.metraz',{'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'o.metraz', {'direction': 'desc'})}}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Cena ^', 'o.cena', {'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'o.cena', {'direction': 'desc'})}}</th>
+                        </tr>
+
+                        {# table body #}
+                        {% for oferta in pagination %}
+                            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                <td><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"> {{ oferta.tytul }}</a></td>
+                                <td>{{ oferta.kategoria }}</td>
+                                <td>{{ oferta.metraz }}<small>m<sup>2</sup></small></td>
+                                <td>{{ oferta.cena }}zł/miesiąc</td>
+                            </tr>
+                        {% endfor %}
+                </table>
+                    {# display navigation #}
+                    <div class="navigation col-sm">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+            </div>
+        {% endif %}
+
+
+        </div>
 
 
 

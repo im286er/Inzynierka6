@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Form\Search;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,8 +17,39 @@ class SearchController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $form = $this->createForm(new Search());
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $data = $form->getData();
+            if ($data['cenaod'] != null)
+                $cenaod = $data['cenaod'];
+            else
+                $cenaod = 0;
+            if ($data['cenado'] != null)
+                $cenado = $data['cenado'];
+            else
+                $cenado = 9999;
 
-        //Budowanie Zapytania
+            if ($data['metrazod'] != null)
+                $metrazod = $data['metrazod'];
+            else
+                $metrazod = 0;
+            if ($data['metrazdo'] != null)
+                $metrazdo = $data['metrazdo'];
+            else
+                $metrazdo = 999;
+            return $this->redirectToRoute('_search', array(
+                'search' =>$data['search'],
+                'cenaod'=>$cenaod,
+                'cenado'=>$cenado,
+                'metrazod'=>$metrazod,
+                'metrazdo'=>$metrazdo,
+                'kategoria'=>$data['kategoria']
+            ));
+        }
+
+
+            //Budowanie Zapytania
         $result = $em->createQueryBuilder();
         $dql=$result->select('o')
                 ->from('AppBundle:Oferty', 'o');
@@ -65,6 +97,7 @@ class SearchController extends Controller
             20/*limit per page*/
         );
         return $this->render(':Szablony:search.html.twig', array(
+            'form' => $form->createView(),
             'pagination' => $pagination,
         ));
 

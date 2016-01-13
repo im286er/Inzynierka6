@@ -17,7 +17,7 @@ class GlownaController extends Controller
      */
     public function newAction(Request $request)
     {
-        $task = new SearchEntity();
+
         $form = $this->createForm(new Search());
 
         $em    = $this->get('doctrine.orm.entity_manager');
