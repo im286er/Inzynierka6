@@ -96,9 +96,54 @@ class SearchController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             20/*limit per page*/
         );
+
+        //Pobieranie zdjęć//Pobieranie zdjęć
+        $dql2   = "SELECT o FROM AppBundle:Oferty o ORDER BY o.views DESC";
+        $query = $em->createQuery($dql2);
+        $oferty = $query->getResult();
+        $i=0;
+        $zdjecia=null;
+        foreach ($oferty as $of)
+        {
+            $Repository = $this->getDoctrine()
+                ->getRepository('AppBundle:Zdjecia');
+
+            $zdjecia[$i]=$Repository->findOneBy(
+                array('oferta' =>$of)
+            );
+            $i=$i+1;
+        }
+
+        //WYPOSAZENIE
+        $Repository = $this->getDoctrine()
+            ->getRepository('AppBundle:Wyposazenie_Oferty');
+
+        $wyposazenie_oferty=$Repository->findBy(
+            array('oferta' =>$of)
+        );
+
+        $Repository = $this->getDoctrine()
+            ->getRepository('AppBundle:Wyposazenie');
+
+        $i=0;
+        $wyp=null;
+        foreach($wyposazenie_oferty as $wyposazenie)
+        {
+            $wyp[$i] = $Repository->find(
+                $wyposazenie->getWyposazenie()
+            )->getNazwawyposazenia();
+            $i=$i+1;
+        }
+
+
+
         return $this->render(':Szablony:search.html.twig', array(
             'form' => $form->createView(),
             'pagination' => $pagination,
+            'zdjecia' => $zdjecia,
+            'oferty'        => $oferty,
+            'wyposazenie_oferty'        => $wyposazenie_oferty,
+            'wyposazenie'=> $wyp,
         ));
 
     }

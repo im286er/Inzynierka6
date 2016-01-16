@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block fos_user_content %}
+    {% stylesheets '@AppBundle/Resources/css/search.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
     <style>
-        #kontener{
-            position: relative;
-            top: 60px;
+        .jumbotron{
+            padding-right: 100px;
         }
     </style>
+    <script src="jquery.hoverImageEnlarge.js"></script>
+
     <div class="jumbotron text-center">
-        <h1>Cztery Ściany</h1>
-        <p>System wspomagania wynajmu stancji</p>
         <div class="row">
             <div class="container" >
                 {{ form_start(form, {'attr': {'class': 'form-horizontal style-form', 'role': 'form'}}) }}
@@ -72,67 +74,82 @@
                 {{ form_end(form) }}
             </div>
         </div>
+
     </div>
 
-    <div class="container">
-
+    <div class="container clearfix">
         {% if pagination.getTotalItemCount==0 %}
             <h1 class="page-header text-center">Nie udało się znaleźć wyników spełniających podane kryteria</h1>
         {% else %}
-        <div class="col-sm-12">
-            <h1 class="page-header text-center">Wyniki wyszukiwania</h1>
-                <table class="table">
-                        <tr>
-                            {# sorting of properties based on query components #}
-                            <th{% if pagination.isSorted('a.tytul') %} class="sorted"{% endif %}>
-                            Tytuł</th>
-                            <th>{{ knp_pagination_sortable(pagination, 'Kategoria', 'o.kategoria') }}</th>
-                            <th>{{ knp_pagination_sortable(pagination, 'Metraz^', 'o.metraz',{'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'o.metraz', {'direction': 'desc'})}}</th>
-                            <th>{{ knp_pagination_sortable(pagination, 'Cena ^', 'o.cena', {'direction': 'asc'})}}{{ knp_pagination_sortable(pagination, 'v', 'o.cena', {'direction': 'desc'})}}</th>
-                        </tr>
-
-                        {# table body #}
+            <div class="col-sm-12 clearfix">
+                <h2 class="page-header text-center">Wyniki wyszukiwania</h2>
+                <div class="row">
+                    <div class="pull-right dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sortowanie
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Kategoria:</li>
+                            <li class="text-right">{{ knp_pagination_sortable(pagination, 'A-Z', 'o.kategoria',{'direction': 'desc'}) }}{{ knp_pagination_sortable(pagination, 'Z-A', 'o.kategoria',{'direction': 'asc'}) }}</li>
+                            <li class="dropdown-header">Metraż:</li>
+                            <li class="text-right">{{ knp_pagination_sortable(pagination, 'najwięcej', 'o.metraz',{'direction': 'desc'})}}{{ knp_pagination_sortable(pagination, 'najmniej', 'o.metraz', {'direction': 'asc'})}}</li>
+                            <li class="dropdown-header">Cena:</li>
+                            <li class="text-right">{{ knp_pagination_sortable(pagination, 'od najwyższej', 'o.cena', {'direction': 'desc'})}}{{ knp_pagination_sortable(pagination, 'od najniższej', 'o.cena', {'direction': 'asc'})}}</li>
+                        </ul>
+                    </div>
+            <p></p>
+                    <div class="tab-content clearfix">
                         {% for oferta in pagination %}
-                            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                                <td><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"> {{ oferta.tytul }}</a></td>
-                                <td>{{ oferta.kategoria }}</td>
-                                <td>{{ oferta.metraz }}<small>m<sup>2</sup></small></td>
-                                <td>{{ oferta.cena }}zł/miesiąc</td>
-                            </tr>
+                        <div class="row">
+                            <div class="col-sm-2 vertical-center">
+                                <div class="thumbnail">
+                                    <div class="">
+                                        {% if zdjecia[loop.index0]!=null %}
+                                            <a data-html="true" href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img class="zdje" src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
+                                        {% else %}
+                                            <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                                        {% endif %}
+                                    </div>
+                                </div><!-- /thumbnail -->
+                            </div><!-- /col-sm-1 -->
+                            <div class="col-sm-10">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <strong><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}">{{ oferta.tytul }}</a></strong>
+                                        <span class="muted pull-right">{{ oferta.kategoria }}</span>
+                                        <p>{{ oferta.cena }}zł/miesiąc</p><span class="muted pull-right">Metraż: {{ oferta.metraz }}<small>m<sup>2</sup></small></span>
+                                        {% if wyposazenie!=null %}
+                                            <div>
+                                            <p>Wyposażenie:
+                                                {% for wyp in wyposazenie %}
+                                                    <lu> {{ wyp }},</lu>
+                                                {% endfor %}
+                                            </p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {% endfor %}
-                </table>
-                    {# display navigation #}
-                    <div class="navigation col-sm">
-                        {{ knp_pagination_render(pagination) }}
+
+                        <div class="pull-right">{{ knp_pagination_render(pagination) }}</div>
                     </div>
             </div>
         {% endif %}
-
-
-        </div>
-
-
+    </div>
+    </div>
 
     <script>
-        $("tr #confirm").click(function(){
-  $("#myModal").modal();
-});
+        $(document).ready(function(){
+            $('.thumbnail').popover({
+                placement: "right",
+                html: true,
+                trigger: 'hover',
+                content: function () {
+                    return '<img src="'+$(this).data('img') + '" />';
+                }
+            });
+        });
     </script>
-    <style>
-        .usun{
-            color: white;
-        }
-        .modal-dialog{
-            position: absolute;
-            left: 35%;
-            margin-left: 0px;
-            height: 500px;
-            top: 50%;
-            margin-top: -250px;
-        }
-        .modal-body{
-            padding:40px 50px;
-            padding-bottom: 50px;
-        }
-    </style>
+
 {% endblock fos_user_content %}
