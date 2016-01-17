@@ -18,13 +18,24 @@ class SearchController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(new Search());
+        $form->get('search')->setData($search);
+        $form->get('kategoria')->setData($kategoria);
+        if($cenaod>=0)$form->get('cenaod')->setData($cenaod);
+        if($cenado<9999)$form->get('cenado')->setData($cenado);
+        if($metrazod>=0)$form->get('metrazod')->setData($metrazod);
+        if($metrazdo<999)$form->get('metrazdo')->setData($metrazdo);
+
         $form->handleRequest($request);
+
+
+
+
         if ($form->isValid()) {
             $data = $form->getData();
             if ($data['cenaod'] != null)
                 $cenaod = $data['cenaod'];
             else
-                $cenaod = 0;
+                $cenaod = -1;
             if ($data['cenado'] != null)
                 $cenado = $data['cenado'];
             else
@@ -33,7 +44,7 @@ class SearchController extends Controller
             if ($data['metrazod'] != null)
                 $metrazod = $data['metrazod'];
             else
-                $metrazod = 0;
+                $metrazod = -1;
             if ($data['metrazdo'] != null)
                 $metrazdo = $data['metrazdo'];
             else

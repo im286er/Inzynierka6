@@ -56,7 +56,7 @@ class GlownaController extends Controller
             if($data['cenaod']!=null)
                 $cenaod=$data['cenaod'];
             else
-                $cenaod=0;
+                $cenaod=-1;
             if($data['cenado']!=null)
                 $cenado=$data['cenado'];
             else
@@ -65,7 +65,7 @@ class GlownaController extends Controller
             if($data['metrazod']!=null)
                 $metrazod=$data['metrazod'];
             else
-                $metrazod=0;
+                $metrazod=-1;
             if($data['metrazdo']!=null)
                 $metrazdo=$data['metrazdo'];
             else

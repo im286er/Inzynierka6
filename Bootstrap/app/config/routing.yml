@@ -31,10 +31,10 @@ _search:
          path:   /search/q={search},co={cenaod},cd={cenado},mo={metrazod},md={metrazdo},k={kategoria}
          defaults:
                   _controller: AppBundle:Search:list
-                  cenaod: 0
+                  cenaod: -1
                   cenado: 9999
                   kategoria: all
-                  metrazod: 0
+                  metrazod: -1
                   metrazdo: 999
 
 
