@@ -9,7 +9,6 @@
             padding-right: 100px;
         }
     </style>
-    <script src="jquery.hoverImageEnlarge.js"></script>
 
     <div class="jumbotron text-center">
         <div class="row">
@@ -104,7 +103,7 @@
                                 <div class="thumbnail">
                                     <div class="">
                                         {% if oferta.zdjecia.first()!=null %}
-                                            <a data-html="true" href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(oferta.zdjecia.first().imagePath) }}"></a>
+                                            <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(oferta.zdjecia.first().imagePath) }}"></a>
                                         {% else %}
                                             <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
                                         {% endif %}
