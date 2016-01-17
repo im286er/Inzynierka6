@@ -100,7 +100,7 @@
                             <div class="thumbnail ">
                                 <div class="vertical-center">
                                 {% if zdjecia[loop.index0]!=null %}
-                                <a href="#"><img class="imgg" src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
+                                <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img class="imgg" src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
                                 {% else %}
                                 <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
                                 {% endif %}
@@ -128,7 +128,7 @@
                                 <div class="thumbnail ">
                                     <div class="vertical-center">
                                     {% if zdjecia[loop.index0]!=null %}
-                                        <a href="#"><img src="{{ asset(zdjecia[loop.index0].imagePath) }}" ></a>
+                                        <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(zdjecia[loop.index0].imagePath) }}" ></a>
                                     {% else %}
                                         <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
                                     {% endif %}

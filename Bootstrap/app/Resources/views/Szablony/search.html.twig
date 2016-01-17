@@ -104,7 +104,7 @@
                                 <div class="thumbnail">
                                     <div class="">
                                         {% if zdjecia[loop.index0]!=null %}
-                                            <a data-html="true" href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img class="zdje" src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
+                                            <a data-html="true" href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
                                         {% else %}
                                             <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
                                         {% endif %}
@@ -138,18 +138,5 @@
         {% endif %}
     </div>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $('.thumbnail').popover({
-                placement: "right",
-                html: true,
-                trigger: 'hover',
-                content: function () {
-                    return '<img src="'+$(this).data('img') + '" />';
-                }
-            });
-        });
-    </script>
 
 {% endblock fos_user_content %}
