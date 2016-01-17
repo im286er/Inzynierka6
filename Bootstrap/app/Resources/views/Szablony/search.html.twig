@@ -103,8 +103,8 @@
                             <div class="col-sm-2 vertical-center">
                                 <div class="thumbnail">
                                     <div class="">
-                                        {% if zdjecia[loop.index0]!=null %}
-                                            <a data-html="true" href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
+                                        {% if oferta.zdjecia.first()!=null %}
+                                            <a data-html="true" href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(oferta.zdjecia.first().imagePath) }}"></a>
                                         {% else %}
                                             <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
                                         {% endif %}
@@ -117,11 +117,11 @@
                                         <strong><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}">{{ oferta.tytul }}</a></strong>
                                         <span class="muted pull-right">{{ oferta.kategoria }}</span>
                                         <p>{{ oferta.cena }}zł/miesiąc</p><span class="muted pull-right">Metraż: {{ oferta.metraz }}<small>m<sup>2</sup></small></span>
-                                        {% if wyposazenie!=null %}
+                                        {% if oferta.wyposazenie.first()!=null   %}
                                             <div>
                                             <p>Wyposażenie:
-                                                {% for wyp in wyposazenie %}
-                                                    <lu> {{ wyp }},</lu>
+                                                {% for wyp in oferta.wyposazenie %}
+                                                    <lu> {{ oferta.wyposazenie[loop.index0].wyposazenie.nazwawyposazenia }},</lu>
                                                 {% endfor %}
                                             </p>
                                             </div>
