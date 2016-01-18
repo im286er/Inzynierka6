@@ -115,6 +115,7 @@
                                     <div class="panel-body">
                                         <strong><a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}">{{ oferta.tytul }}</a></strong>
                                         <span class="muted pull-right">{{ oferta.kategoria }}</span>
+                                        <p>{{ oferta.miasto }}, {{ oferta.dzielnica }}, {{ oferta.ulica }}</p>
                                         <p>{{ oferta.cena }}zł/miesiąc</p><span class="muted pull-right">Metraż: {{ oferta.metraz }}<small>m<sup>2</sup></small></span>
                                         {% if oferta.wyposazenie.first()!=null   %}
                                             <div>
