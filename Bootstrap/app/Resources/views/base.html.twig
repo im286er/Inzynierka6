@@ -55,7 +55,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     {% if is_granted("ROLE_ADMIN") %}
-                        <li><a href="{{ path('easyadmin') }}">ADMIN PANEL</a></li>
+                        <li><a href="{{ path('sonata_admin_dashboard') }}">ADMIN PANEL</a></li>
                     {% endif %}
                 <li><a href="{{ path('NoweOgloszenie') }}">DODAJ OGŁOSZENIE</a></li>
                 <li> <a href="{{ path('fos_user_profile_show') }}">

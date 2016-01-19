@@ -12,3 +12,13 @@ services:
             class:     AppBundle\Services\Namer
             tags:
                         - { name: namer }
+    sonata.admin.post:
+        class: AppBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "User" }
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
