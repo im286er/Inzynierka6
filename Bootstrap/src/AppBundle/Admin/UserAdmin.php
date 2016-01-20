@@ -37,7 +37,7 @@ class UserAdmin extends Admin
             ->add('confirmation_token', 'text', array('label' => 'Confirmation Token', 'required' => false))
             ->add('roles', 'collection', array('label' => 'Roles'))
             ->add('obserwowane')
-            ->add('komentarze')
+            ->add('komentowany')
 
         ;
     }

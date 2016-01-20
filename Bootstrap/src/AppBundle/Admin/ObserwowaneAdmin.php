@@ -21,7 +21,7 @@ class ObserwowaneAdmin extends Admin
     {
         $formMapper
             ->add('id', 'integer', array('label' => 'id'))
-            ->add('idOferty', 'integer', array('label' => 'idoferty'))
+            ->add('id_oferty', 'integer', array('label' => 'idoferty'))
             ->add('user', 'integer', array('label' => 'idUzytkownika'))
         ;
     }

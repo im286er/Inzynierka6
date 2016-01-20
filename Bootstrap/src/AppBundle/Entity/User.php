@@ -131,6 +131,7 @@ class User extends BaseUser
     public function __construct()
     {
         $this->obserwowane = new ArrayCollection;
+        $this->komentowany = new ArrayCollection;
     }
 
     /**
@@ -172,6 +173,35 @@ class User extends BaseUser
     public function removeObserwowane(Obserwowane $obserwowane)
     {
         $this->obserwowane->removeElement($obserwowane);
+    }
+
+    /**
+     * Get komentowany
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getKomentowany ()
+    {
+        return $this->komentowany ;
+    }
+
+
+    public function setKomentowany (ArrayCollection $komentowany )
+    {
+        $this->komentowany  = $komentowany ;
+
+        return $this;
+    }
+
+
+    /**
+     * Remove Komentowany
+     *
+     * @param Komentarze $komentowany
+     */
+    public function removeKomentowany(komentarze $komentowany)
+    {
+        $this->komentarze->removeElement($komentowany);
     }
 
 }
