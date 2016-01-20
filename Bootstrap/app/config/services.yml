@@ -12,7 +12,7 @@ services:
             class:     AppBundle\Services\Namer
             tags:
                         - { name: namer }
-    sonata.admin.post:
+    sonata.admin.user:
         class: AppBundle\Admin\UserAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Content", label: "User" }
@@ -21,4 +21,24 @@ services:
             - AppBundle\Entity\User
             - ~
         calls:
-            - [ setTranslationDomain, [AcmeDemoBundle]]
+            - [ setTranslationDomain, [AppBundle]]
+    sonata.admin.obserwowane:
+            class: AppBundle\Admin\ObserwowaneAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: "Content", label: "Obserwowane" }
+            arguments:
+                - ~
+                - AppBundle\Entity\Obserwowane
+                - ~
+            calls:
+                - [ setTranslationDomain, [AppBundle]]
+    sonata.admin.oferty:
+                class: AppBundle\Admin\OfertyAdmin
+                tags:
+                    - { name: sonata.admin, manager_type: orm, group: "Content", label: "Oferty" }
+                arguments:
+                    - ~
+                    - AppBundle\Entity\Oferty
+                    - ~
+                calls:
+                    - [ setTranslationDomain, [AppBundle]]

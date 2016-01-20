@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -125,6 +126,52 @@ class User extends BaseUser
     public function getTelefon()
     {
         return $this->telefon;
+    }
+
+    public function __construct()
+    {
+        $this->obserwowane = new ArrayCollection;
+    }
+
+    /**
+     * Get obserwowane
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObserwowane ()
+    {
+        return $this->obserwowane ;
+    }
+
+
+    public function setObserwowane (ArrayCollection $obserwowane )
+    {
+        $this->obserwowane  = $obserwowane ;
+
+        return $this;
+    }
+
+    /**
+     * Add Obserwowane
+     *
+     * @param Obserwowane $obserwowane
+     * @return Obserwowane
+     */
+    public function addObserwowane (Obserwowane $obserwowane )
+    {
+        $this->obserwowane[] = $obserwowane;
+
+        return $this;
+    }
+
+    /**
+     * Remove Obserwowane
+     *
+     * @param Obserwowane $obserwowane
+     */
+    public function removeObserwowane(Obserwowane $obserwowane)
+    {
+        $this->obserwowane->removeElement($obserwowane);
     }
 
 }

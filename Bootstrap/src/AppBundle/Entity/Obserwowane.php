@@ -31,7 +31,7 @@ class Obserwowane
     /**
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="obserwowane")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
      */
     protected $user;
 
@@ -70,11 +70,11 @@ class Obserwowane
     }
 
     /**
-     * Set user
+     * Set User
      *
-     * @param integer $user
+     * @param User $user
      *
-     * @return Obserwowane
+     * @return User
      */
     public function setUser($user)
     {
@@ -84,15 +84,18 @@ class Obserwowane
     }
 
     /**
-     * Get user
+     * Get User
      *
-     * @return integer
+     * @return User
      */
     public function getUser()
     {
         return $this->user;
     }
+
     public function __toString() {
-        return (string) $this->id;
+        return (string) $this->oferta;
     }
+
+
 }

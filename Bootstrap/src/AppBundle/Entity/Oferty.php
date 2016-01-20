@@ -7,7 +7,7 @@
  */
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="oferty")
@@ -747,4 +747,5 @@ class Oferty
     public function __toString() {
         return (string) $this->idOferty;
     }
+
 }

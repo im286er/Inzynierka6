@@ -22,13 +22,23 @@ class UserAdmin extends Admin
         $formMapper
             ->add('id', 'integer', array('label' => 'id'))
             ->add('username', 'text', array('label' => 'Username'))
+            ->add('username_canonical', 'text', array('label' => 'Username_canon'))
             ->add('email', 'text', array('label' => 'e-mail'))
+            ->add('email_canonical', 'text', array('label' => 'e-mail_canon'))
             ->add('imie', 'text', array('label' => 'Imie'))
             ->add('Nazwisko', 'text', array('label' => 'Nazwisko'))
             ->add('Telefon', 'integer', array('label' => 'Telefon'))
+            ->add('password', 'text', array('label' => 'Password'))
+            ->add('salt', 'text', array('label' => 'Salt'))
+            ->add('last_login', 'datetime', array('label' => 'Last login'))
             ->add('enabled', 'checkbox', array('label' => 'Enabled', 'required' => false))
             ->add('locked', 'checkbox', array('label' => 'Locked', 'required' => false))
+            ->add('expired', 'checkbox', array('label' => 'Expired', 'required' => false))
+            ->add('confirmation_token', 'text', array('label' => 'Confirmation Token', 'required' => false))
             ->add('roles', 'collection', array('label' => 'Roles'))
+            ->add('obserwowane')
+            ->add('komentarze')
+
         ;
     }
 
