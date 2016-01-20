@@ -22,16 +22,6 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle]]
-    sonata.admin.obserwowane:
-            class: AppBundle\Admin\ObserwowaneAdmin
-            tags:
-                - { name: sonata.admin, manager_type: orm, group: "Content", label: "Obserwowane" }
-            arguments:
-                - ~
-                - AppBundle\Entity\Obserwowane
-                - ~
-            calls:
-                - [ setTranslationDomain, [AppBundle]]
     sonata.admin.oferty:
                 class: AppBundle\Admin\OfertyAdmin
                 tags:

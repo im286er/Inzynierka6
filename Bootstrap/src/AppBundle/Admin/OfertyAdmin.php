@@ -21,8 +21,25 @@ class OfertyAdmin extends Admin
     {
         $formMapper
             ->add('idOferty', 'integer', array('label' => 'id'))
-            ->add('kategoria', 'text', array('label' => 'kat'))
+            ->add('kategoria', 'text', array('label' => 'Kategoria'))
+            ->add('typ', 'text', array('label' => 'Typ'))
+            ->add('wolneod', 'date', array('label' => 'Wolne od'))
             ->add('tytul', 'text', array('label' => 'tytul'))
+            ->add('miasto', 'text', array('label' => 'Miasto'))
+            ->add('dzielnica', 'text', array('label' => 'Dzielnica'))
+            ->add('ulica', 'text', array('label' => 'Ulica'))
+            ->add('pietro', 'integer', array('label' => 'Pietro'))
+            ->add('liczbapokoi', 'integer', array('label' => 'Liczba pokoi'))
+            ->add('maksliczbosob', 'integer', array('label' => 'Maksymalna liczba osob'))
+            ->add('metraz', 'integer', array('label' => 'Metraz'))
+            ->add('cena', 'integer', array('label' => 'Cena'))
+            ->add('dodatkoweoplaty', 'integer', array('label' => 'Dodatkowe oplaty'))
+            ->add('kaucja', 'integer', array('label' => 'Kaucja'))
+            ->add('opis', 'text', array('label' => 'Opis'))
+            ->add('wyslano', 'datetime', array('label' => 'Wyslano'))
+            ->add('preferencja')
+            ->add('wyposazenie')
+            ->add('zdjecia')
         ;
     }
 
@@ -42,6 +59,8 @@ class OfertyAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id_oferty')
+            ->addIdentifier('kategoria')
+            ->addIdentifier('wyslano')
         ;
     }
 }

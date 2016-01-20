@@ -19,7 +19,7 @@ class Oferty
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $idOferty;
+    public $idOferty;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -486,6 +486,7 @@ class Oferty
     public function __construct()
     {
         $this->wyposazenie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->preferencja = new ArrayCollection;
     }
 
     /**
@@ -747,5 +748,6 @@ class Oferty
     public function __toString() {
         return (string) $this->idOferty;
     }
+
 
 }
