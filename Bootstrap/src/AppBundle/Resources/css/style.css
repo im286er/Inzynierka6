@@ -12,7 +12,11 @@
     letter-spacing: 4px;
     border-radius: 0;
 }
-
+.vertical-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .navbar li a, .navbar .navbar-brand {
     color: #fff !important;
 }

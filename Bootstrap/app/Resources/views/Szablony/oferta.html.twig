@@ -17,7 +17,7 @@
                                             <div class="col-sm-12" id="carousel-bounding-box">
                                                 <div class="carousel slide" id="myCarousel">
                                                     <!-- Carousel items -->
-                                                    <div class="carousel-inner" id="karuselka">
+                                                    <div class="carousel-inner ">
                                                         {% if zdjecia!=null %}
                                                             {% for zdj in zdjecia %}
 
@@ -34,10 +34,11 @@
 
                                                     </div>
                                                     <!-- Carousel nav -->
-                                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                    <div class="">
+                                                    <a class="left carousel-control " href="#myCarousel" role="button" data-slide="prev">
                                                         <span class="glyphicon glyphicon-chevron-left"></span>
-                                                    </a>
-                                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                    </a></div>
+                                                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
                                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                                     </a>
                                                 </div>
@@ -79,11 +80,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <button id="obs" type="button" class="btn btn-info pull-right">Dodaj do obserwowanych</button>
+                        </div>
                     </div>
-
-
-                                <button id="obs" type="button" class="btn btn-info col-sm-offset-10">Dodaj do obserwowanych</button>
-
 
                 </div>
                     <div class="row">
@@ -157,10 +157,6 @@
 
 
     <style>
-        #karuselka{
-            width:307px;
-            height:200px;
-        }
         .modal-dialog {
             width:1100px;
             position:relative;
@@ -175,11 +171,6 @@
         }
         #opis2{
             word-wrap: break-word;
-        }
-        #obs{
-            position: relative;
-            top:42px;
-            left:8px;
         }
         #studnie{
             position: relative;
@@ -197,12 +188,6 @@
             position: relative;
             top: 40px;
         }
-        .hide-bullets {
-            list-style:none;
-            margin-left: -40px;
-            margin-top:20px;
-        }
-
         .thumbnail {
             padding: 0;
         }

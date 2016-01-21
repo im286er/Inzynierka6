@@ -55,7 +55,9 @@
                 </div>
                 {% endfor %}
                 <div class="pull-right">{{ knp_pagination_render(komentarze) }}</div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <button class="btn btn-primary col-sm-2 col-sm-offset-10" id="confirm">Dodaj komentarz</button>
+                {% endif %}
             </div>
 
         </div>
