@@ -82,30 +82,31 @@
         {% else %}
             <div class="col-sm-12 clearfix">
                 <h2 class="page-header text-center">Wyniki wyszukiwania</h2>
+                <div class="pull-right dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sortowanie
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Kategoria:</li>
+                        <li class="text-right">{{ knp_pagination_sortable(pagination, 'A-Z', 'o.kategoria',{'direction': 'desc'}) }}{{ knp_pagination_sortable(pagination, 'Z-A', 'o.kategoria',{'direction': 'asc'}) }}</li>
+                        <li class="dropdown-header">Metraż:</li>
+                        <li class="text-right">{{ knp_pagination_sortable(pagination, 'najwięcej', 'o.metraz',{'direction': 'desc'})}}{{ knp_pagination_sortable(pagination, 'najmniej', 'o.metraz', {'direction': 'asc'})}}</li>
+                        <li class="dropdown-header">Cena:</li>
+                        <li class="text-right">{{ knp_pagination_sortable(pagination, 'od najwyższej', 'o.cena', {'direction': 'desc'})}}{{ knp_pagination_sortable(pagination, 'od najniższej', 'o.cena', {'direction': 'asc'})}}</li>
+                    </ul>
+                </div>
                 <div class="row">
-                    <div class="pull-right dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sortowanie
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Kategoria:</li>
-                            <li class="text-right">{{ knp_pagination_sortable(pagination, 'A-Z', 'o.kategoria',{'direction': 'desc'}) }}{{ knp_pagination_sortable(pagination, 'Z-A', 'o.kategoria',{'direction': 'asc'}) }}</li>
-                            <li class="dropdown-header">Metraż:</li>
-                            <li class="text-right">{{ knp_pagination_sortable(pagination, 'najwięcej', 'o.metraz',{'direction': 'desc'})}}{{ knp_pagination_sortable(pagination, 'najmniej', 'o.metraz', {'direction': 'asc'})}}</li>
-                            <li class="dropdown-header">Cena:</li>
-                            <li class="text-right">{{ knp_pagination_sortable(pagination, 'od najwyższej', 'o.cena', {'direction': 'desc'})}}{{ knp_pagination_sortable(pagination, 'od najniższej', 'o.cena', {'direction': 'asc'})}}</li>
-                        </ul>
-                    </div>
+
             <p></p>
                     <div class="tab-content clearfix">
                         {% for oferta in pagination %}
                         <div class="row">
-                            <div class="col-sm-2 vertical-center">
+                            <div class="col-sm-2 ">
                                 <div class="thumbnail">
                                     <div class="">
                                         {% if oferta.zdjecia.first()!=null %}
                                             <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="{{ asset(oferta.zdjecia.first().imagePath) }}"></a>
                                         {% else %}
-                                            <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                                            <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="http://placehold.it/360x240" alt=""></a>
                                         {% endif %}
                                     </div>
                                 </div>
