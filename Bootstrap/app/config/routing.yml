@@ -27,6 +27,9 @@ _profil:
 _ofertyuser:
          path:   /profil/{id}/oferty
          defaults:  { _controller: AppBundle:OfertyUzytkownika:show}
+_komentarzeuser:
+         path:   /profil/{id}/komentarze
+         defaults:  { _controller: AppBundle:Komentarze:list}
 _search:
          path:   /search/q={search},co={cenaod},cd={cenado},mo={metrazod},md={metrazdo},k={kategoria}
          defaults:
@@ -36,6 +39,11 @@ _search:
                   kategoria: all
                   metrazod: -1
                   metrazdo: 999
+_noweogloszenie:
+         path:   /NoweOgloszenie
+         defaults:  { _controller: AppBundle:NoweOgloszenie:new}
+
+
 
 
 

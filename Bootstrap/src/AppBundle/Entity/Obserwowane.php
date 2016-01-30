@@ -31,7 +31,7 @@ class Obserwowane
     /**
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="obserwowane")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $user;
 
