@@ -103,13 +103,10 @@ class SearchController extends Controller
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $dql->getQuery(), /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            20/*limit per page*/
+            $dql->getQuery(), /* pobranie zapytania */
+            $request->query->getInt('page', 1)/* numer wyświetlonej strony */,
+            10/* limit wyników na stronę */
         );
-
-
-
 
 
         return $this->render(':Szablony:search.html.twig', array(

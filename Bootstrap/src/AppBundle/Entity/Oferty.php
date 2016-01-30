@@ -123,7 +123,7 @@ class Oferty
     protected $views;
 
     /**
-     * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="oferta")
+     * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="oferta", cascade={"persist", "remove"})
      */
     protected $obserwowane;
     /**
