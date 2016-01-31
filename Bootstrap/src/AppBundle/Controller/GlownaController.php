@@ -47,6 +47,13 @@ class GlownaController extends Controller
             8/*limit per page*/
 
         );
+
+        $Repository = $this->getDoctrine()
+            ->getRepository('AppBundle:Oferty');
+
+        $Oferty=$Repository->findAll();
+
+
         $form->handleRequest($request);
         if ($form->isValid())
         {
@@ -86,7 +93,8 @@ class GlownaController extends Controller
         return $this->render(':Szablony:glowna.html.twig', array(
             'form' => $form->createView(),
             'pagination' => $pagination,
-            'zdjecia' => $zdjecia
+            'zdjecia' => $zdjecia,
+            'oferty' => $Oferty
 
 
         ));
