@@ -7,7 +7,7 @@
  */
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="oferty")
@@ -19,12 +19,16 @@ class Oferty
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $idOferty;
+    public $idOferty;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
     protected $kategoria;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $typ;
 
     /**
      * @ORM\Column(type="date")
@@ -89,7 +93,7 @@ class Oferty
     protected $kaucja;
 
     /**
-     * @ORM\Column(type="text", length=200, nullable=true)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     protected $opis;
 
@@ -102,17 +106,39 @@ class Oferty
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $wyslano;
+    public $wyslano;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wyposazenie_Oferty", mappedBy="wyposazenie_oferty")
+     * @ORM\OneToMany(targetEntity="Wyposazenie_Oferty", mappedBy="oferta")
      */
     protected $wyposazenie;
+
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="Preferencje_Oferty", mappedBy="oferta")
+     */
+    protected $preferencja;
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $views;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Obserwowane", mappedBy="oferta", cascade={"persist", "remove"})
+     */
+    protected $obserwowane;
+    /**
+     * @ORM\OneToMany(targetEntity="Zdjecia", mappedBy="oferta")
+     */
+    protected $zdjecia;
+
+    /**
+    * @ORM\Column(type="decimal", nullable=true, precision=15, scale=12)
+    */
+    protected $long;
+    /**
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=12)
+     */
+    protected $lat;
 
 
     /**
@@ -468,6 +494,12 @@ class Oferty
     public function __construct()
     {
         $this->wyposazenie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->preferencja = new ArrayCollection;
+        $curl     = new \Ivory\HttpAdapter\CurlHttpAdapter();
+        $geocoder = new \Geocoder\Provider\GoogleMaps($curl);
+        $adress=$geocoder->geocode($this->miasto.' '.$this->ulica);
+        $this->long=$adress->first()->getLongitude();
+        $this->lat=$adress->first()->getLatitude();
     }
 
     /**
@@ -494,40 +526,7 @@ class Oferty
         return $this->opis;
     }
 
-    /**
-     * Add wyposazenie
-     *
-     * @param \AppBundle\Entity\Wyposazenie_Oferty $wyposazenie
-     *
-     * @return Oferty
-     */
-    public function addWyposazenie(\AppBundle\Entity\Wyposazenie_Oferty $wyposazenie)
-    {
-        $this->wyposazenie[] = $wyposazenie;
     
-        return $this;
-    }
-
-    /**
-     * Remove wyposazenie
-     *
-     * @param \AppBundle\Entity\Wyposazenie_Oferty $wyposazenie
-     */
-    public function removeWyposazenie(\AppBundle\Entity\Wyposazenie_Oferty $wyposazenie)
-    {
-        $this->wyposazenie->removeElement($wyposazenie);
-    }
-
-    /**
-     * Get wyposazenie
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWyposazenie()
-    {
-        return $this->wyposazenie;
-    }
-
     /**
      * Set tytul
      *
@@ -574,5 +573,242 @@ class Oferty
     public function getKategoria()
     {
         return $this->kategoria;
+    }
+
+    /**
+     * Set views
+     *
+     * @param integer $views
+     *
+     * @return Oferty
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
+    
+        return $this;
+    }
+
+    /**
+     * Get views
+     *
+     * @return integer
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * Set typ
+     *
+     * @param string $typ
+     *
+     * @return Oferty
+     */
+    public function setTyp($typ)
+    {
+        $this->typ = $typ;
+
+        return $this;
+    }
+
+    /**
+     * Get typ
+     *
+     * @return string
+     */
+    public function getTyp()
+    {
+        return $this->typ;
+    }
+
+    /**
+     * Add wyposazenie
+     *
+     * @param \AppBundle\Entity\Wyposazenie_Oferty $wyposazenie
+     *
+     * @return Oferty
+     */
+    public function addWyposazenie(\AppBundle\Entity\Wyposazenie_Oferty $wyposazenie)
+    {
+        $this->wyposazenie[] = $wyposazenie;
+
+        return $this;
+    }
+
+    /**
+     * Remove wyposazenie
+     *
+     * @param \AppBundle\Entity\Wyposazenie_Oferty $wyposazenie
+     */
+    public function removeWyposazenie(\AppBundle\Entity\Wyposazenie_Oferty $wyposazenie)
+    {
+        $this->wyposazenie->removeElement($wyposazenie);
+    }
+
+    /**
+     * Get wyposazenie
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWyposazenie()
+    {
+        return $this->wyposazenie;
+    }
+
+    /**
+     * Add preferencja
+     *
+     * @param \AppBundle\Entity\Preferencje_Oferty $preferencja
+     *
+     * @return Oferty
+     */
+    public function addPreferencja(\AppBundle\Entity\Preferencje_Oferty $preferencja)
+    {
+        $this->preferencja[] = $preferencja;
+
+        return $this;
+    }
+
+    /**
+     * Remove preferencja
+     *
+     * @param \AppBundle\Entity\Preferencje_Oferty $preferencja
+     */
+    public function removePreferencja(\AppBundle\Entity\Preferencje_Oferty $preferencja)
+    {
+        $this->preferencja->removeElement($preferencja);
+    }
+
+    /**
+     * Get preferencja
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPreferencja()
+    {
+        return $this->preferencja;
+    }
+
+    /**
+     * Add obserwowane
+     *
+     * @param \AppBundle\Entity\Obserwowane $obserwowane
+     *
+     * @return Oferty
+     */
+    public function addObserwowane(\AppBundle\Entity\Obserwowane $obserwowane)
+    {
+        $this->obserwowane[] = $obserwowane;
+
+        return $this;
+    }
+
+    /**
+     * Remove obserwowane
+     *
+     * @param \AppBundle\Entity\Obserwowane $obserwowane
+     */
+    public function removeObserwowane(\AppBundle\Entity\Obserwowane $obserwowane)
+    {
+        $this->obserwowane->removeElement($obserwowane);
+    }
+
+    /**
+     * Get obserwowane
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObserwowane()
+    {
+        return $this->obserwowane;
+    }
+
+    /**
+     * Add zdjecium
+     *
+     * @param \AppBundle\Entity\Zdjecia $zdjecium
+     *
+     * @return Oferty
+     */
+    public function addZdjecium(\AppBundle\Entity\Zdjecia $zdjecium)
+    {
+        $this->zdjecia[] = $zdjecium;
+
+        return $this;
+    }
+
+    /**
+     * Remove zdjecium
+     *
+     * @param \AppBundle\Entity\Zdjecia $zdjecium
+     */
+    public function removeZdjecium(\AppBundle\Entity\Zdjecia $zdjecium)
+    {
+        $this->zdjecia->removeElement($zdjecium);
+    }
+
+    /**
+     * Get zdjecia
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getZdjecia()
+    {
+        return $this->zdjecia;
+    }
+    public function __toString() {
+        return (string) $this->idOferty;
+    }
+
+
+
+    /**
+     * Set long
+     *
+     * @param string $long
+     *
+     * @return Oferty
+     */
+    public function setLong($long)
+    {
+        $this->long = $long;
+
+        return $this;
+    }
+
+    /**
+     * Get long
+     *
+     * @return string
+     */
+    public function getLong()
+    {
+        return $this->long;
+    }
+
+    /**
+     * Set lat
+     *
+     * @param string $lat
+     *
+     * @return Oferty
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return string
+     */
+    public function getLat()
+    {
+        return $this->lat;
     }
 }

@@ -131,6 +131,14 @@ class Oferty
      */
     protected $zdjecia;
 
+    /**
+    * @ORM\Column(type="decimal", nullable=true, precision=15, scale=12)
+    */
+    protected $longitude;
+    /**
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=12)
+     */
+    protected $latitude;
 
 
     /**
@@ -750,4 +758,76 @@ class Oferty
     }
 
 
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return Oferty
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function GetLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+ * Set latitude
+ *
+ * @param string $latitude
+ *
+ * @return Oferty
+ */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+    /**
+     * Set latlong
+     *
+     * @param string $latlong
+     *
+     * @return Oferty
+     */
+    public function setLatLong()
+    {
+        $curl     = new \Ivory\HttpAdapter\CurlHttpAdapter();
+        // get curl config
+        $conf = $curl->getConfiguration();
+
+// set timeout
+        $conf->setTimeout(1000);
+
+// save config
+        $curl->setConfiguration($conf);
+        $geocoder = new \Geocoder\Provider\GoogleMaps($curl);
+        $adress=$geocoder->geocode($this->miasto.' '.$this->ulica);
+        $this->longitude=$adress->first()->getLongitude();
+        $this->latitude=$adress->first()->getLatitude();
+
+        return $this;
+    }
 }

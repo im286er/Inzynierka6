@@ -16,6 +16,7 @@ return array(
     'Oneup\\UploaderBundle' => array($vendorDir . '/oneup/uploader-bundle'),
     'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
     'Knp\\Component' => array($vendorDir . '/knplabs/knp-components/src'),
+    'Geocoder' => array($vendorDir . '/willdurand/geocoder/src'),
     'Exporter' => array($vendorDir . '/sonata-project/exporter/lib'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),

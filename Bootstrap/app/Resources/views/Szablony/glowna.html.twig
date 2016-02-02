@@ -159,25 +159,23 @@
     </div>
     <!-- /#myCarousel -->
     <script type="text/javascript">
-    var geocoder;
     var map;
+    var myLatLng;
     function initMap() {
     geocoder = new google.maps.Geocoder();
-        var myLatLng = {lat: 51.2379753, lng: 22.5754416};
+         myLatLng = {lat: 51.2379753, lng: 22.5754416};
 
          map = new google.maps.Map(document.getElementById('map'), {
             zoom: 11,
             center: myLatLng});
 
     //var address = document.getElementById("address").value;
-    {% for oferta in pagination %}
-        geocoder.geocode( { 'address':'{{ oferta.miasto }}'+' '+'{{ oferta.ulica }}' }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK)
-        {
-            map.setCenter(results[0].geometry.location);
+    {% for oferta in oferty %}
+            myLatLng = {lat: {{ oferta.latitude }}, lng: {{ oferta.longitude }}};
+            map.setCenter(myLatLng);
             var marker = new google.maps.Marker({
             map: map,
-            position: results[0].geometry.location,
+            position: myLatLng,
             title: '{{ oferta.tytul }}'
             });
             var contentString = '<div id="content" style="font-family:Helvetica,Arial,sans-serif";>'+
@@ -212,12 +210,8 @@
                     infowindow.open(map, marker);
                 });
 
-        }
-        else
-        {
-            alert("Geocode was not successful for the following reason: " + status);
-        }
-        });
+
+
     {% endfor %}
     }
 

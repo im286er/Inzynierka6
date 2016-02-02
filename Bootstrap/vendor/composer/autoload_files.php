@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    $vendorDir . '/igorw/get-in/src/get_in.php',
     $vendorDir . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/functions.php',
     $vendorDir . '/kriswallsmith/assetic/src/functions.php',
 );

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Zend\\Diactoros\\' => array($vendorDir . '/zendframework/zend-diactoros/src'),
     'Vich\\UploaderBundle\\' => array($vendorDir . '/vich/uploader-bundle'),
     'Vich\\TestBundle\\' => array($vendorDir . '/vich/uploader-bundle/Tests/Fixtures/App/src/TestBundle'),
     'Symfony\\Component\\' => array($vendorDir . '/symfony/symfony/src/Symfony/Component'),
@@ -25,12 +26,14 @@ return array(
     'Sonata\\BlockBundle\\' => array($vendorDir . '/sonata-project/block-bundle'),
     'Sonata\\AdminBundle\\' => array($vendorDir . '/sonata-project/admin-bundle'),
     'Sensio\\Bundle\\FrameworkExtraBundle\\' => array($vendorDir . '/sensio/framework-extra-bundle'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Knp\\Menu\\' => array($vendorDir . '/knplabs/knp-menu/src/Knp/Menu'),
     'Knp\\Bundle\\PaginatorBundle\\' => array($vendorDir . '/knplabs/knp-paginator-bundle'),
     'Knp\\Bundle\\MenuBundle\\' => array($vendorDir . '/knplabs/knp-menu-bundle'),
     'JavierEguiluz\\Bundle\\EasyAdminBundle\\' => array($vendorDir . '/javiereguiluz/easyadmin-bundle'),
     'Ivory\\JsonBuilder\\' => array($vendorDir . '/egeloen/json-builder/src'),
+    'Ivory\\HttpAdapter\\' => array($vendorDir . '/egeloen/http-adapter/src'),
     'Ivory\\GoogleMap\\' => array($vendorDir . '/egeloen/google-map/src'),
     'Ivory\\GoogleMapBundle\\' => array($vendorDir . '/egeloen/google-map-bundle'),
     'Incenteev\\ParameterHandler\\' => array($vendorDir . '/incenteev/composer-parameter-handler'),

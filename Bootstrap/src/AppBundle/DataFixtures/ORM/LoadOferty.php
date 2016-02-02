@@ -48,6 +48,7 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
         $oferta->setWolneod(new \DateTime("now"));
         $oferta->setWyslano();
         $oferta->setTytul($gen->getTytuł());
+        $oferta->setLatLong();
 
         $Repository = $this->container->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User');
@@ -65,6 +66,8 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
         for ($i = 1; $i <= 100; $i++)
         {
             $this->AddOferta($manager);
+            echo "\n".'Wygenerowano oferte:'.$i;
+            usleep(2000000);
         }       
 
         $manager->flush();
