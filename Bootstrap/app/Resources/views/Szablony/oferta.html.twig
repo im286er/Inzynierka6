@@ -65,16 +65,16 @@
                     <div class="col-sm-5" id="naw" >
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#mapa">Mapa</a></li>
-                            <li><a data-toggle="tab" href="#kontakt">Kontakt</a></li>
+                            <li><a data-toggle="tab" href="#kontakt2">Kontakt</a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="mapa" class="tab-pane fade in active">
                                 <div id="map" style="height:400px;width:100%;"></div>
                             </div>
-                            <div id="kontakt" class="tab-pane fade">
+                            <div id="kontakt2" class="tab-pane fade">
                                 <h3 class="page-header">Dodane przez:<a href="{{ path('_profil', {'id': oferty.userid.id}) }}" class="text-left"> {{ oferty.userid }}</a></h3>
-                                <div class="btn-group-vertical  col-sm-4">
+                                <div class="btn-group-vertical  col-sm-6">
                                     <button id="telefon" class="btn btn-default btn-md">Numer telefonu</button>
                                     <button id="email" class="btn btn-default btn-md">Adres email</button>
                                 </div>
@@ -120,7 +120,6 @@
                         </div>
                         <div id="dol">
                             <p class="text-right col-sm-offset-8"><strong>Wyświetleń: </strong>{{  oferty.views }}</p>
-                            <a href="#"><p class="text-right col-sm-offset-8"><strong>Zgłoś naruszenie zasad</strong></p></a>
                         </div>
                     </div>
 
@@ -128,7 +127,7 @@
 
             </div>
             <div class="modal" id="myModal" role="dialog">
-                <div class="modal-dialog">
+                <div class="modal-dialog center">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button class="close" type="button" data-dismiss="modal">×</button>
@@ -157,10 +156,23 @@
 
 
     <style>
+        .modal {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 768px) {
+            .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
         .modal-dialog {
-            width:1100px;
-            position:relative;
-            left:375px;
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
         }
         .thumbnail {margin-bottom:6px;}
 
@@ -244,8 +256,8 @@
     {# Skrypt do kontaktu #}
     <script>
         $(document).ready(function(){
-            $('#telefon').popover({title: "nr telefonu", content: "{{ oferty.userid.telefon }}", trigger: "hover", placement: "right"});
-            $('#email').popover({title: "Adres email", content: "{{ oferty.userid.email }}", trigger: "hover", placement: "right"});
+            $('#telefon').popover({content: "{{ oferty.userid.telefon }}", trigger: "hover", placement: "right"});
+            $('#email').popover({content: "{{ oferty.userid.email }}", trigger: "hover", placement: "right"});
         });
     </script>
 
