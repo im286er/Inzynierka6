@@ -74,7 +74,7 @@
     </div>
 
 
-    <div id="map" class="center" style="width: 100%; height: 480px; margin: auto;"></div>
+    <div id="map" class="center" style="width: 80%; height: 480px; margin: auto;"></div>
     <!-- Add Google Maps -->
 
     <div class="col-sm-offset-0">
@@ -97,7 +97,7 @@
                                 {% if zdjecia[loop.index0]!=null %}
                                 <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img class="imgg" src="{{ asset(zdjecia[loop.index0].imagePath) }}"></a>
                                 {% else %}
-                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                                <a href="{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}"><img src="http://placehold.it/360x240" alt=""></a>
                                 {% endif %}
                                 </div>
                             </div>
@@ -154,61 +154,62 @@
     </div>
     <!-- /#myCarousel -->
     <script type="text/javascript">
-    var map;
-    var myLatLng;
-    function initMap() {
-    geocoder = new google.maps.Geocoder();
-         myLatLng = {lat: 51.2379753, lng: 22.5754416};
+        var map;
+        var myLatLng;
+        function initMap() {
+            geocoder = new google.maps.Geocoder();
+            myLatLng = {lat: 51.2379753, lng: 22.5754416};
 
-         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: myLatLng});
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: myLatLng});
 
-    //var address = document.getElementById("address").value;
-    {% for oferta in oferty %}
-            myLatLng = {lat: {{ oferta.latitude }}, lng: {{ oferta.longitude }}};
-            map.setCenter(myLatLng);
-            var marker = new google.maps.Marker({
-            map: map,
-            position: myLatLng,
-            title: '{{ oferta.tytul }}'
-            });
-            var contentString = '<div id="content" style="font-family:Helvetica,Arial,sans-serif";>'+
-                                    '<div id="siteNotice">'+'</div>'+
-                                        '<h4 id="firstHeading" class="firstHeading" style="text-align: center;">'+'<a href="'+' {{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'">'+'{{ oferta.tytul }}'+'</a></h4>'+
-                                    '<div id="bodyContent container">'+
-                                        '<div class="row-fluid">'+
-                                            '<div class="col-sm-6" >'
-                                                            {% if oferta.zdjecia.first()!=null %}
+            //var address = document.getElementById("address").value;
+            {% for oferta in oferty %}
+                {% if oferta.latitude!=300 %}
+                    myLatLng = {lat:{{ oferta.latitude }}, lng: {{ oferta.longitude}}};
+                    map.setCenter(myLatLng);
+                    var marker{{ loop.index0 }} = new google.maps.Marker({
+                        map: map,
+                        position: myLatLng,
+                        title: '{{ oferta.tytul }}'
+                    });
+                    var contentString = '<div id="content" style="font-family:Helvetica,Arial,sans-serif";>'+
+                                            '<div id="siteNotice">'+'</div>'+
+                                            '<h4 id="firstHeading" class="firstHeading" style="text-align: center;">'+'<a href="'+' {{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'">'+'{{ oferta.tytul }}'+'</a></h4>'+
+                                            '<div id="bodyContent container">'+
+                                                '<div class="row-fluid">'+
+                                                    '<div class="col-sm-6" >'
+                                                        {% if oferta.zdjecia.first()!=null %}
                                                             +'<a href="'+'{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'"><img src="'+'{{ asset(oferta.zdjecia.first().imagePath) }}'+'"></a>'
-                                                            {% else %}
+                                                        {% else %}
                                                             +'<a href="#"><img src="http://placehold.it/360x240" class="img-thumbnail" alt=""></a>'
-                                                            {% endif %}
-                                            +'</div>'+
-                                            '<div class="col-sm-6" >'+
-                                                '<p><b>'+'{{ oferta.miasto }}'+", "+'{{ oferta.dzielnica }}'+", "+'{{ oferta.ulica }}'+'</b></p>'+
-                                                '<p><b>' +"Kategoria: "+'</b>'+'{{ oferta.kategoria }}'+'</p>'+
-                                                '<p><b>' +"Metraż: "+'</b>'+'{{ oferta.metraz }}'+"m"+'<sup>2</sup>'+'</p>'+
-                                                '<p><b>' +"Cena: "+'</b>'+'{{ oferta.cena }}'+"zł/miesiąc"+'</p>'+
-                                                '<br></<br>'+
-                                                '<p align="right" >'+'<a href="'+' {{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'">'+"Zobacz ofertę>>"+'</a><p>'+
+                                                        {% endif %}
+                                                    +'</div>'+
+                                                    '<div class="col-sm-6" >'+
+                                                        '<p>'+'{{ oferta.miasto }}'+", "+'{{ oferta.dzielnica }}'+", "+'{{ oferta.ulica }}'+'</p>'+
+                                                        '<p><b>' +"Kategoria: "+'</b>'+'{{ oferta.kategoria }}'+'</p>'+
+                                                        '<p><b>' +"Metraż: "+'</b>'+'{{ oferta.metraz }}'+"m"+'<sup>2</sup>'+'</p>'+
+                                                        '<p><b>' +"Cena: "+'</b>'+'{{ oferta.cena }}'+"zł/miesiąc"+'</p>'+
+                                                        '<br></<br>'+
+                                                        '<p align="right" >'+'<a href="'+' {{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'">'+"Zobacz ofertę>>"+'</a><p>'+
+                                                    '</div>'+
+                                                '</div>'+
                                             '</div>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>';
+                                        '</div>';
 
-            var infowindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
+                    var infowindow{{ loop.index0 }} = new google.maps.InfoWindow({
+                        content: contentString
+                    });
 
-            marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                });
-
-
-
-    {% endfor %}
-    }
+                    marker{{ loop.index0 }}.addListener('click', function() {
+                        infowindow{{ loop.index0 }}.open(map, marker{{ loop.index0 }});
+                    });
+                {% endif %}
+            {% endfor %}
+            myLatLng = {lat: 51.2379753, lng: 22.5754416};
+            map.setCenter(myLatLng);
+        }
 
     </script>
     <script async defer

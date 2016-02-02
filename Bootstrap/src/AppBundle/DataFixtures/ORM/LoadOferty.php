@@ -37,6 +37,7 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
         $oferta = new Oferty();
         $oferta->setMiasto($gen->getMiasto());
         $oferta->setUlica($gen->getUlica());
+        $oferta->setNumer($gen->getNumer());
         $oferta->setKategoria($gen->getKategoria());
         $oferta->setCena($gen->getCena());
         $oferta->setDzielnica($gen->getDzielnica());

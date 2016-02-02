@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-sm-6 text-left">
                                     <p><strong>Dostępne od: </strong>{{ oferty.wolneod|date('d-m-Y') }}</p>
-                                    <p><strong>Miasto: </strong>{{ oferty.miasto }}</p>
+                                    <p><strong>Miejscowość: </strong>{{ oferty.miasto }}</p>
                                     <p><strong>Dzielnica: </strong>{{  oferty.dzielnica }}</p>
                                     <p><strong>Ulica: </strong>{{  oferty.ulica }}</p>
                                     <p><strong>Typ stancji: </strong>{{  oferty.kategoria }}</p>
@@ -296,13 +296,13 @@
         function initMap() {
             geocoder = new google.maps.Geocoder();
 
-            geocoder.geocode( { 'address':'{{ oferty.miasto }}'+' '+'{{ oferty.ulica }}' }, function(results, status) {
+            geocoder.geocode( { 'address':'{{ oferty.miasto }}'+' '+'{{ oferty.ulica }}'+' '+'{{ oferty.numer }}' }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK)
                 {
 
                     map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 15
-                        });
+                    });
                     map.setCenter(results[0].geometry.location);
                     var marker = new google.maps.Marker({
                         map: map,
@@ -312,7 +312,8 @@
                 }
                 else
                 {
-                    alert("Geocode was not successful for the following reason: " + status);
+                    document.getElementById('map').innerHTML = '<h4>Geolokalizacja adresu dla tej oferty nie powiodła się</h4>';
+
                 }
             });
         }

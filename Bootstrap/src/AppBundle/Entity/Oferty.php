@@ -55,6 +55,11 @@ class Oferty
     protected $ulica;
 
     /**
+     * @ORM\Column(type="integer", )
+     */
+    protected $numer;
+
+    /**
     * @ORM\Column(type="smallint")
     */
     protected $pietro;
@@ -824,9 +829,16 @@ class Oferty
 // save config
         $curl->setConfiguration($conf);
         $geocoder = new \Geocoder\Provider\GoogleMaps($curl);
-        $adress=$geocoder->geocode($this->miasto.' '.$this->ulica);
-        $this->longitude=$adress->first()->getLongitude();
-        $this->latitude=$adress->first()->getLatitude();
+        $adress=$geocoder->geocode($this->miasto.' '.$this->ulica.' '.$this->numer);
+        if($adress->count()!=0) {
+            $this->longitude = $adress->first()->getLongitude();
+            $this->latitude = $adress->first()->getLatitude();
+        }
+        else
+        {
+            $this->longitude=300;
+            $this->latitude=300;
+        }
 
         return $this;
     }

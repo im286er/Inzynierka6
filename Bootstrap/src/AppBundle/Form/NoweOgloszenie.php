@@ -34,6 +34,9 @@ class NoweOgloszenie extends AbstractType
                 ->add('ulica', 'text', array(
                     'max_length' => '35',
                 ))
+                ->add('numer', 'number', array(
+                    'max_length' => '4',
+                 ))
                 ->add('typstancji', 'choice', array(
                     'choices'  => array('Miejsce w pokoju' => 'Miejsce w pokoju', 'Pokój' => 'Pokój', 'Mieszkanie' => 'Mieszkanie', 'Kawalerka' => 'Kawalerka'),
                 ))

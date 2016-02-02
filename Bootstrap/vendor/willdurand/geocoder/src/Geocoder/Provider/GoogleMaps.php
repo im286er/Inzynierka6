@@ -169,9 +169,9 @@ class GoogleMaps extends AbstractHttpProvider implements LocaleAwareProvider
         }
 
         // no result
-        if (!isset($json->results) || !count($json->results) || 'OK' !== $json->status) {
-            throw new NoResult(sprintf('Could not execute query "%s".', $query));
-        }
+       // if (!isset($json->results) || !count($json->results) || 'OK' !== $json->status) {
+        //    throw new NoResult(sprintf('Could not execute query "%s".', $query));
+       // }
 
         $results = [];
         foreach ($json->results as $result) {

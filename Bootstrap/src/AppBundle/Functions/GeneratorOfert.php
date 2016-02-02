@@ -92,6 +92,11 @@ class GeneratorOfert
         $this->dzielnica=$this->tablicadzielnic[$i];
         return $this->tablicadzielnic[$i];
     }
+    public function getNumer()
+    {
+        mt_srand($this->make_seed());
+        return mt_rand(1,5);
+    }
     public function getPietro()
     {
         mt_srand($this->make_seed());

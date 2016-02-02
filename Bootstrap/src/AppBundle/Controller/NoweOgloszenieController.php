@@ -69,6 +69,7 @@ class NoweOgloszenieController extends Controller
             $Oferta->setMiasto($data["miasto"]);
             $Oferta->setDzielnica($data["dzielnica"]);
             $Oferta->setUlica($data["ulica"]);
+            $Oferta->setNumer($data["numer"]);
             $Oferta->setPietro($data["pietro"]);
             $Oferta->setLiczbapokoi($data["liczbapokoi"]);
             $Oferta->setMaksliczbosob($data["maksliczbaosob"]);
