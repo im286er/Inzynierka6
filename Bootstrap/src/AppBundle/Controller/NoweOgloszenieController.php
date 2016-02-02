@@ -82,8 +82,8 @@ class NoweOgloszenieController extends Controller
             $Oferta->setKategoria($data["typstancji"]);
             $Oferta->setTyp($data["typbudynku"]);
             $Oferta->setLatLong();
-
             $Oferta->setWyslano();
+            $Oferta->setWygasa($data["czastrwania"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($Oferta);
             $em->flush();

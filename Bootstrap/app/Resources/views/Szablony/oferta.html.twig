@@ -51,13 +51,14 @@
                                     <p><strong>Miejscowość: </strong>{{ oferty.miasto }}</p>
                                     <p><strong>Dzielnica: </strong>{{  oferty.dzielnica }}</p>
                                     <p><strong>Ulica: </strong>{{  oferty.ulica }}</p>
+                                    <p><strong>Numer: </strong>{{  oferty.numer }}</p>
                                     <p><strong>Typ stancji: </strong>{{  oferty.kategoria }}</p>
                                     <p><strong>Typ budynku: </strong>{{  oferty.typ }}</p>
                                     <p><strong>Piętro: </strong>{{  oferty.pietro }}</p>
                                     <p><strong>Liczba pokoi: </strong>{{ oferty.liczbapokoi }}</p>
                                     <p><strong>Maksymalna liczba osób: </strong>{{ oferty.maksliczbosob }}</p>
                                     <p><strong>Metraż: </strong>{{ oferty.metraz }}</p>
-                                    <p><strong>Ogłoszenie wygasa:</strong></p>
+                                    <p><strong>Ogłoszenie wygasa:</strong>{{ oferty.wygasa|date('d-m-Y') }}</p>
                                 </div>
                             </div>
                         </div>

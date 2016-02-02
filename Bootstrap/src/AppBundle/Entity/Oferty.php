@@ -144,7 +144,10 @@ class Oferty
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=12)
      */
     protected $latitude;
-
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $wygasa;
 
     /**
      * Get idOferty
@@ -841,5 +844,32 @@ class Oferty
         }
 
         return $this;
+    }
+
+    /**
+     * Set wygasa
+     *
+     * @param integer $wygasa
+     *
+     * @return Oferty
+     */
+    public function setWygasa($wygasa)
+    {
+
+        $d1 = new \DateTime();
+        $d2 = $wygasa*24*60*60;
+
+        $this->wygasa= $d1->setTimestamp($this->wyslano->getTimestamp()+$d2);
+        return $this;
+    }
+
+    /**
+     * Get wygasa
+     *
+     * @return \DateTime
+     */
+    public function getWygasa()
+    {
+        return $this->wygasa;
     }
 }

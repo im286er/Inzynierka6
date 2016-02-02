@@ -48,6 +48,7 @@ class LoadOferty implements FixtureInterface, ContainerAwareInterface, OrderedFi
         $oferta->setTyp($gen->getTyp());
         $oferta->setWolneod(new \DateTime("now"));
         $oferta->setWyslano();
+        $oferta->setWygasa($gen->getWygasa());
         $oferta->setTytul($gen->getTytuł());
         $oferta->setLatLong();
 

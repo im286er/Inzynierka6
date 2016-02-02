@@ -11,7 +11,9 @@ class GeneratorOfert
 {
     private $tablicamiast=Array('Lublin','Zamość','Chełm','Świdnik','Puławy');
     private $tablicadzielnic=Array('Czuby','Czechów','Śródmieście','Tatary','Dziesiąta','Kalinowszczyzna');
-    private $tablicaulic=Array('Głęboka','Krakowskie Przedmieście','Tymiankowa','Herbowa','3 maja','Kraśnicka','Bursztynowa','Perłowa','Armii Krajowej','Nadbystrzycka','Zamojska');
+    private $tablicaulic=Array('3 maja','Armii Krajowej','Mickiewicza','Długa','Kościuszki','Słowackiego','Mikołaja Kopernika','Spokojna',
+                                'Piłsudskiego','Ogrodowa','Wiejska','Warszawska','Jana Pawła II','Leśna','Lipowa','Wesoła','Ludowa','Letnia',
+                                'Fabryczna','Gęsia','Różana','Strażacka','Fabryczna','Targowa');
 
     private $miasto='Lublin';
     private $dzielnica='Śródmieście';
@@ -167,7 +169,6 @@ class GeneratorOfert
     {
         mt_srand($this->make_seed());
         $i=mt_rand(0,count($this->tablicaulic)-1);
-        $this->dzielnica=$this->tablicaulic[$i];
         return $this->tablicaulic[$i];
     }
     public function getUser()
@@ -186,5 +187,22 @@ class GeneratorOfert
         }
     }
 
+    public function getWygasa()
+    {
+        mt_srand($this->make_seed());
+        $i=mt_rand(0,2);
+        switch ($i)
+        {
+            case 0:
+                return 14;
+                break;
+            case 1:
+                return 30;
+                break;
+            case 2:
+                return 60;
+                break;
 
+        }
+    }
 }

@@ -183,7 +183,7 @@
                                                         {% if oferta.zdjecia.first()!=null %}
                                                             +'<a href="'+'{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'"><img src="'+'{{ asset(oferta.zdjecia.first().imagePath) }}'+'"></a>'
                                                         {% else %}
-                                                            +'<a href="#"><img src="http://placehold.it/360x240" class="img-thumbnail" alt=""></a>'
+                                                            +'<a href="'+'{{ path('_oferta', {'idOferty' : oferta.idOferty}) }}'+'"><img src="http://placehold.it/360x240" class="img-thumbnail" alt=""></a>'
                                                         {% endif %}
                                                     +'</div>'+
                                                     '<div class="col-sm-6" >'+
