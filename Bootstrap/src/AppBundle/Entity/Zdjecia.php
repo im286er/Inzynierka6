@@ -77,6 +77,7 @@ class Zdjecia
         $this->imagePath = '/uploads/gallery/'.$this->getOferta()->getIdOferty().'/'.$this->getImageName();
     }
 
+
     /**
      * Get id
      *
@@ -90,11 +91,11 @@ class Zdjecia
     /**
      * Set oferta
      *
-     * @param integer $oferta
+     * @param \AppBundle\Entity\Oferty $oferta
      *
      * @return Zdjecia
      */
-    public function setOferta($oferta)
+    public function setOferta(\AppBundle\Entity\Oferty $oferta = null)
     {
         $this->oferta = $oferta;
 
@@ -104,13 +105,10 @@ class Zdjecia
     /**
      * Get oferta
      *
-     * @return integer
+     * @return \AppBundle\Entity\Oferty
      */
     public function getOferta()
     {
         return $this->oferta;
-    }
-    public function __toString() {
-        return $this->imageName;
     }
 }

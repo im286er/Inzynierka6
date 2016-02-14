@@ -12,6 +12,9 @@ _home:
 _oferta:
          path:   /oferta/{idOferty}
          defaults:  { _controller: AppBundle:Oferta:show }
+_edytuj:
+         path:  /oferta/{idOferty}/edit
+         defaults: { _controller: AppBundle:Edit:new}
 _usun:
          path:  /oferta/{idOferty}/delete
          defaults: { _controller: AppBundle:UsunOferte:deleteby }

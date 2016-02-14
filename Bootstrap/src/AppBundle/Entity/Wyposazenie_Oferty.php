@@ -34,6 +34,10 @@ class Wyposazenie_Oferty
     protected $wyposazenie;
 
 
+    public function __toString() {
+        return (string) $this->idWyposazenie;
+    }
+
     /**
      * Get idWyposazenie
      *
@@ -47,21 +51,21 @@ class Wyposazenie_Oferty
     /**
      * Set oferta
      *
-     * @param integer $oferta
+     * @param \AppBundle\Entity\Oferty $oferta
      *
      * @return Wyposazenie_Oferty
      */
-    public function setOferta($oferta)
+    public function setOferta(\AppBundle\Entity\Oferty $oferta = null)
     {
         $this->oferta = $oferta;
-    
+
         return $this;
     }
 
     /**
      * Get oferta
      *
-     * @return integer
+     * @return \AppBundle\Entity\Oferty
      */
     public function getOferta()
     {
@@ -71,27 +75,24 @@ class Wyposazenie_Oferty
     /**
      * Set wyposazenie
      *
-     * @param integer $wyposazenie
+     * @param \AppBundle\Entity\Wyposazenie $wyposazenie
      *
      * @return Wyposazenie_Oferty
      */
-    public function setWyposazenie($wyposazenie)
+    public function setWyposazenie(\AppBundle\Entity\Wyposazenie $wyposazenie = null)
     {
         $this->wyposazenie = $wyposazenie;
-    
+
         return $this;
     }
 
     /**
      * Get wyposazenie
      *
-     * @return integer
+     * @return \AppBundle\Entity\Wyposazenie
      */
     public function getWyposazenie()
     {
         return $this->wyposazenie;
-    }
-    public function __toString() {
-        return (string) $this->idWyposazenie;
     }
 }

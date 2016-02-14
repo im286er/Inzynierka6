@@ -31,7 +31,7 @@
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Opcje <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Zmień</a></li>
+                                        <li><a href="{{ path('_edytuj',{ 'idOferty': oferta.idOferty }) }}"><span class="glyphicon glyphicon-wrench"></span> Zmień</a></li>
                                         <li class="divider"></li>
                                         <li><a data-toggle="modal" id="confirm" data-id="{{oferta.idOferty}}"><span class="glyphicon glyphicon-trash"></span> Usuń</a></li>
                                     </ul>

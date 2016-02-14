@@ -34,6 +34,10 @@ class Preferencje_Oferty
      */
     public $preferencja;
 
+    public function __toString() {
+        return (string) $this->idPreferencje;
+    }
+
     /**
      * Get idPreferencje
      *
@@ -47,21 +51,21 @@ class Preferencje_Oferty
     /**
      * Set oferta
      *
-     * @param integer $oferta
+     * @param \AppBundle\Entity\Oferty $oferta
      *
      * @return Preferencje_Oferty
      */
-    public function setOferta($oferta)
+    public function setOferta(\AppBundle\Entity\Oferty $oferta = null)
     {
         $this->oferta = $oferta;
-    
+
         return $this;
     }
 
     /**
      * Get oferta
      *
-     * @return integer
+     * @return \AppBundle\Entity\Oferty
      */
     public function getOferta()
     {
@@ -71,28 +75,24 @@ class Preferencje_Oferty
     /**
      * Set preferencja
      *
-     * @param integer $preferencja
+     * @param \AppBundle\Entity\Preferencje $preferencja
      *
      * @return Preferencje_Oferty
      */
-    public function setPreferencja($preferencja)
+    public function setPreferencja(\AppBundle\Entity\Preferencje $preferencja = null)
     {
         $this->preferencja = $preferencja;
-    
+
         return $this;
     }
 
     /**
      * Get preferencja
      *
-     * @return integer
+     * @return \AppBundle\Entity\Preferencje
      */
     public function getPreferencja()
     {
         return $this->preferencja;
-    }
-
-    public function __toString() {
-        return (string) $this->idPreferencje;
     }
 }

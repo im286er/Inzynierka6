@@ -7,6 +7,11 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use AppBundle\Entity\Obserwowane;
+
+use FOS\UserBundle\Model\UserInterface;
+
 
 class WystawioneOgloszeniaController extends Controller
 {
@@ -15,6 +20,10 @@ class WystawioneOgloszeniaController extends Controller
      */
 
     public function listAction(Request $request){
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
         $em    = $this->get('doctrine.orm.entity_manager');
 
         $dql   = "SELECT a FROM AppBundle:Oferty a WHERE a.user_id=".$this->getUser()->getID();

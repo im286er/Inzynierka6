@@ -1,0 +1,538 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}
+    {% stylesheets '@AppBundle/Resources/css/noweogloszenie.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    <script src="{{ asset('bundles/bootstrap-datepicker-master/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('bundles/bootstrap-datepicker-master/js/locales/bootstrap-datepicker.pl.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css') }}" />
+
+    <div class="container" >
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal style-form', 'role': 'form'}}) }}
+        <div class="row">
+            <div class="page-header">
+                <h2>Nowe ogłoszenie</h2>
+            </div>
+        </div>
+        <div class="row">
+            <h3 class="">Podstawowe informacje</h3>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        {{ form_label(form.tytul, 'Tytuł(*):', {'label_attr': {'class': 'col-sm-4 control-label '}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.tytul, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.tytul) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        {{ form_label(form.wolneod, 'Wolne od(*):', {'label_attr': {'class': 'col-md-4 control-label '}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.wolneod, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.wolneod) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.miasto, 'Miejscowość(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.miasto, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.miasto) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.dzielnica, 'Dzielnica(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.dzielnica, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.dzielnica) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.ulica, 'Ulica(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.ulica, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.ulica) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.numer, 'Numer(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.numer, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.numer) }}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                       <strong class="col-md-4 control-label">Ogłoszenie wygasa:</strong><small style="margin-left: 2%;">{{ oferta.wygasa|date('d-m-Y') }}</small>
+                        <div class="hidden">
+                            {{ form_widget(form.czastrwania) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        {{ form_label(form.typstancji, 'Typ stancji(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.typstancji, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.typstancji) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.typbudynku, 'Typ budynku(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.typbudynku, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.typbudynku) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.pietro, 'Piętro(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.pietro, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.pietro) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.liczbapokoi, 'Liczba pokoi(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.liczbapokoi, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.liczbapokoi) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.maksliczbaosob, 'Maksymalna liczba osób(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                        <div class="col-sm-4">
+                            {{ form_widget(form.maksliczbaosob, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.maksliczbaosob) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.metraz, 'Metraż(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}<small>m<sup>2</sup></small>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.metraz, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.metraz) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <h3 class="">Wyposażenie</h3>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {{ form_label(form.internet, 'Internet:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.internet, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.internet) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.telefon, 'Telefon:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.telefon, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.telefon) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.telewizor, 'Telewizor:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.telewizor, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.telewizor) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.kablowka, 'TV-kablowa:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.kablowka, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.kablowka) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {{ form_label(form.pralka, 'Pralka:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.pralka, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.pralka) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.lodowka, 'Lodówka:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.lodowka, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.lodowka) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.prysznic, 'Prysznic:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.prysznic, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.prysznic) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.wanna, 'Wanna:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.wanna, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.wanna) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {{ form_label(form.balkon, 'Balkon:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.balkon, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.balkon) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.taras, 'Taras:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.taras, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.taras) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.parking, 'Parking:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.parking, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.parking) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.garaz, 'Garaż:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.garaz, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.garaz) }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-xs-6">
+                <div class="row">
+                    <p></p>
+                    <h3 class="">Współlokatorzy</h3>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {{ form_label(form.kobiety, 'Kobiety:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.kobiety, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.kobiety) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.mezczyzni, 'Mężczyźni:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.mezczyzni, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.mezczyzni) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.palacy, 'Palący:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.palacy, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.palacy) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {{ form_label(form.studenci, 'Studenci:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.studenci, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.studenci) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.pary, 'Pary:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.pary, {'attr': {'class':''}}) }}
+                            {{ form_errors(form.pary) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_label(form.pracujacy, 'Pracujący:', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.pracujacy, {'attr': {'id':''}}) }}
+                            {{ form_errors(form.pracujacy) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <h3 class="">Opłaty</h3>
+                    <div class="form-group">
+                        {{ form_label(form.cenazamiesiac, 'Cena za miesiąc(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}<small>zł</small>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.cenazamiesiac, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.cenazamiesiac) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.dodatkoweoplaty, 'Dodatkowe oplaty na miesiąc(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}<small>zł</small>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.dodatkoweoplaty, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.dodatkoweoplaty) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.kaucja, 'Kaucja(*):', {'label_attr': {'class': 'col-md-4 control-label'}}) }}<small>zł</small>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.kaucja, {'attr': {'class':'form-control'}}) }}
+                            {{ form_errors(form.kaucja) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="galeria">
+                <div class="col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong><h4>Galeria</h4></strong></div>
+
+
+
+                        <!-- Fine Uploader Gallery CSS file
+                        ====================================================================== -->
+                        <link href="{{ asset('bundles/fineuploader/fine-uploader-new.css') }}" rel="stylesheet">
+
+                        <!-- Fine Uploader jQuery JS file
+                        ====================================================================== -->
+                        <script src="{{ asset('bundles/fineuploader/jquery.fine-uploader.js') }}"></script>
+
+                        <!-- Fine Uploader Gallery template
+                        ====================================================================== -->
+                        <script type="text/template" id="qq-template-gallery">
+                            <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="Upuść zdjęcia tutaj ">
+
+                                <div class="qq-upload-button-selector qq-upload-button">
+                                    <div>Dodaj zdjęcie</div>
+                                </div>
+
+                                <div class="qq-upload-message">
+                                    <div>(Maks. liczba zdjęć: 4, Dozwolone formaty: png, jpg, jpeg)</div>
+                                </div>
+
+                                <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+                                    <div class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                                    <span class="qq-upload-drop-area-text-selector"></span>
+                                </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>Analizowanie przesyłanych plików...</span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+                                <ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
+                                    <li>
+                                        <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                                        <div class="qq-progress-bar-container-selector qq-progress-bar-container">
+                                            <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                                        </div>
+                                        <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                                        <div class="qq-thumbnail-wrapper">
+                                            <img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+                                        </div>
+                                        <button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
+                                        <button type="button" class="qq-upload-retry-selector qq-upload-retry">
+                                            <span class="qq-btn qq-retry-icon" aria-label="Retry"></span>
+                                            Ponów
+                                        </button>
+
+                                        <div class="qq-file-info">
+                                            <div class="qq-file-name">
+                                                <span class="qq-upload-file-selector qq-upload-file"></span>
+                                                <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
+                                            </div>
+                                            <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                                            <span class="qq-upload-size-selector qq-upload-size"></span>
+                                            <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+                                                <span class="qq-btn qq-delete-icon" aria-label="Delete"></span>
+                                            </button>
+                                            <button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+                                                <span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+                                            </button>
+                                            <button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+                                                <span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <dialog class="qq-alert-dialog-selector">
+                                    <div class="qq-dialog-message-selector"></div>
+                                    <div class="qq-dialog-buttons">
+                                        <button type="button" class="qq-cancel-button-selector">Zamknij</button>
+                                    </div>
+                                </dialog>
+
+                                <dialog class="qq-confirm-dialog-selector">
+                                    <div class="qq-dialog-message-selector"></div>
+                                    <div class="qq-dialog-buttons">
+                                        <button type="button" class="qq-cancel-button-selector">Nie</button>
+                                        <button type="button" class="qq-ok-button-selector">Tak</button>
+                                    </div>
+                                </dialog>
+
+                                <dialog class="qq-prompt-dialog-selector">
+                                    <div class="qq-dialog-message-selector"></div>
+                                    <input type="text">
+                                    <div class="qq-dialog-buttons">
+                                        <button type="button" class="qq-cancel-button-selector">Anuluj</button>
+                                        <button type="button" class="qq-ok-button-selector">Ok</button>
+                                    </div>
+                                </dialog>
+                            </div>
+                        </script>
+
+
+
+
+                        <!-- Fine Uploader DOM Element
+                        ====================================================================== -->
+                        <div id="fine-uploader-gallery"></div>
+
+                        <!-- Your code to create an instance of Fine Uploader and bind to the DOM/template
+                        ====================================================================== -->
+                        <script>
+                            $('#fine-uploader-gallery').fineUploader({
+                                template: 'qq-template-gallery',
+                                request: {
+                                    endpoint: "{{ oneup_uploader_endpoint('gallery') }}"
+                                },
+                                thumbnails: {
+                                    placeholders: {
+                                        waitingPath: '/source/placeholders/waiting-generic.png',
+                                        notAvailablePath: '/source/placeholders/not_available-generic.png'
+                                    }
+                                },
+                                validation: {
+                                    itemLimit: 4,
+                                    allowedExtensions: ['jpeg', 'jpg', 'png']
+                                },
+                                // deleteFile: {
+                                //    enabled: true,
+                                //   forceConfirm: true,
+                                //   endpoint: "{{ oneup_uploader_endpoint('gallery') }}"
+                                //}
+                            });
+                        </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="row">
+                <div class="form-group">
+                    {{ form_label(form.dodatkoweinformacje, 'Dodatkowe informacje:', {'label_attr': {'for': 'comment'}}) }}
+                    {{ form_widget(form.dodatkoweinformacje, {'attr': {'class':'form-control counted', 'id':'area'}}) }}
+                    <h6 class="col-sm-offset-5" id="counter">Pozostało 255 znaków</h6>
+                    {{ form_errors(form.dodatkoweinformacje) }}
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-4">
+                    <button id="wystaw" type="submit" class="btn btn-primary btn-lg" name="signup" value="Sign up">Edytuj ogłoszenie</button>
+                </div>
+            </div>
+        </div>
+
+
+        {{ form_end(form) }}
+    </div>
+
+
+    <script>
+        /**
+         *
+         * jquery.charcounter.js version 1.2
+         * requires jQuery version 1.2 or higher
+         * Copyright (c) 2007 Tom Deater (http://www.tomdeater.com)
+         * Licensed under the MIT License:
+         * http://www.opensource.org/licenses/mit-license.php
+         *
+         */
+
+        (function($) {
+            /**
+             * attaches a character counter to each textarea element in the jQuery object
+             * usage: $("#myTextArea").charCounter(max, settings);
+             */
+
+            $.fn.charCounter = function (max, settings) {
+                max = max || 100;
+                settings = $.extend({
+                    container: "<span></span>",
+                    classname: "charcounter",
+                    format: "(Pozostało %1 znaków)",
+                    pulse: true,
+                    delay: 0
+                }, settings);
+                var p, timeout;
+
+                function count(el, container) {
+                    el = $(el);
+                    if (el.val().length > max) {
+                        el.val(el.val().substring(0, max));
+                        if (settings.pulse && !p) {
+                            pulse(container, true);
+                        };
+                    };
+                    if (settings.delay > 0) {
+                        if (timeout) {
+                            window.clearTimeout(timeout);
+                        }
+                        timeout = window.setTimeout(function () {
+                            container.html(settings.format.replace(/%1/, (max - el.val().length)));
+                        }, settings.delay);
+                    } else {
+                        container.html(settings.format.replace(/%1/, (max - el.val().length)));
+                    }
+                };
+
+                function pulse(el, again) {
+                    if (p) {
+                        window.clearTimeout(p);
+                        p = null;
+                    };
+                    el.animate({ opacity: 0.1 }, 100, function () {
+                        $(this).animate({ opacity: 1.0 }, 100);
+                    });
+                    if (again) {
+                        p = window.setTimeout(function () { pulse(el) }, 200);
+                    };
+                };
+
+                return this.each(function () {
+                    var container;
+                    if (!settings.container.match(/^<.+>$/)) {
+                        // use existing element to hold counter message
+                        container = $(settings.container);
+                    } else {
+                        // append element to hold counter message (clean up old element first)
+                        $(this).next("." + settings.classname).remove();
+                        container = $(settings.container)
+                                .insertAfter(this)
+                                .addClass(settings.classname);
+                    }
+                    $(this)
+                            .unbind(".charCounter")
+                            .bind("keydown.charCounter", function () { count(this, container); })
+                            .bind("keypress.charCounter", function () { count(this, container); })
+                            .bind("keyup.charCounter", function () { count(this, container); })
+                            .bind("focus.charCounter", function () { count(this, container); })
+                            .bind("mouseover.charCounter", function () { count(this, container); })
+                            .bind("mouseout.charCounter", function () { count(this, container); })
+                            .bind("paste.charCounter", function () {
+                                var me = this;
+                                setTimeout(function () { count(me, container); }, 10);
+                            });
+                    if (this.addEventListener) {
+                        this.addEventListener('input', function () { count(this, container); }, false);
+                    };
+                    count(this, container);
+                });
+            };
+
+        })(jQuery);
+
+        $(function() {
+            $(".counted").charCounter(255,{container: "#counter"});
+        });
+
+    </script>
+
+{% endblock fos_user_content %}

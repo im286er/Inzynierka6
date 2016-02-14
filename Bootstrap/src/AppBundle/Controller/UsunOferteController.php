@@ -21,17 +21,18 @@ class UsunOferteController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $oferta = $em->getRepository('AppBundle:Oferty')->findOneBy(
-            array('idOferty' => $idOferty)
-        );
-        if($oferta->getUserId()!=$user){
-            throw new AccessDeniedException('This user does not have access to this section.');
+        else {
+            $em = $this->getDoctrine()->getEntityManager();
+            $oferta = $em->getRepository('AppBundle:Oferty')->findOneBy(
+                array('idOferty' => $idOferty)
+            );
+            if ($oferta->getUserId() != $user) {
+                throw new AccessDeniedException('This user does not have access to this section.');
+            } else {
+                $em->remove($oferta);
+                $em->flush();
+            }
         }
-
-        $em->remove($oferta);
-        $em->flush();
 
         return $this->redirectToRoute('App_MojeWystawioneOgloszenia');
 
